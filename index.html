@@ -266,145 +266,73 @@
     
     // Initialize map
     async function initMap() {
-      // Attendre que les données soient chargées avant d'initialiser la carte
+      // Charger les données des jours et des points de carte
       window.tripData = await loadDayData();
-      
+      window.mapPoints = await loadMapData();
+
       map = L.map('map-container').setView([36.17, -115.90], 4);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      // Load KML
+      // Créer les marqueurs depuis map_data.json
+      if (Array.isArray(window.mapPoints)) {
+        window.mapPoints.forEach(point => {
+          const marker = L.marker([point.lat, point.lng], {
+            icon: markerManager.createIcon(false)
+          }).addTo(map);
+          markerManager.addMarker(point.day, marker);
+          const popupContent = `
+            <div class="marker-popup">
+              <h3 class="font-bold text-lg mb-2">${point.title}</h3>
+              <div class="text-gray-700">Jour ${point.day}</div>
+            </div>
+          `;
+          marker.bindPopup(popupContent, { className: 'custom-popup' });
+          marker.bindTooltip(`Jour ${point.day}`, { direction: 'top', sticky: true });
+          marker.on('mouseover', () => marker.openTooltip());
+          marker.on('mouseout', () => marker.closeTooltip());
+          marker.on('click', function() {
+            markerManager.markers.forEach((m, d) => {
+              if (m !== marker) m.closePopup();
+            });
+            marker.openTooltip();
+            showDay(point.day);
+            const navBtn = document.querySelector(`.day-button[data-day="${point.day}"]`);
+            if (navBtn) {
+              document.querySelectorAll('.day-button').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.day, 10) === point.day);
+              });
+              navBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        });
+      }
+
+      // Charger le tracé KML (sans les points, déjà gérés)
       console.log('Loading KML file...');
       omnivore.kml('./itinary.kml')
         .on('ready', async function() {
           console.log('KML file loaded successfully');
           this.eachLayer(function(layer) {
-            if (layer.feature && layer.feature.properties && layer.feature.properties.name) {
-              const name = layer.feature.properties.name;
-              console.log('[KML] Layer name:', name.trim());
-              // Extraction robuste du numéro de jour
-              const dayMatch = name.match(/Jour\s*(\d+)/i);
-              if (!dayMatch) {
-                console.warn('[KML] Ignored layer (no day match):', name);
-                return;
-              }
-              const day = parseInt(dayMatch[1]);
-              console.log('[KML] Parsed day:', day);
-              if (!isNaN(day) && window.tripData) {
-                const dayInfo = window.tripData.find(d => d.day === day);
-                if (dayInfo) {
-                  if (layer.feature.geometry.type === 'Point') {
-                    const latlng = layer.getLatLng();
-                    const marker = L.marker(latlng, {
-                      icon: markerManager.createIcon(false)
-                    }).addTo(map);
-                    markerManager.addMarker(day, marker);
-                    console.log('[KML] Marker created for day', day, 'at', latlng);
-                    const popupContent = `
-                      <div class="marker-popup">
-                        <h3 class="font-bold text-lg mb-2">${dayInfo.jour}</h3>
-                        <div class="text-gray-700">Jour ${day}</div>
-                      </div>
-                    `;
-                    marker.bindPopup(popupContent, { className: 'custom-popup' });
-                    marker.bindTooltip(dayInfo.jour, { direction: 'top' });
-                    marker.on('click', function() {
-                      markerManager.markers.forEach((m, d) => {
-                        if (m !== marker) m.closePopup();
-                      });
-                      marker.openTooltip();
-                      showDay(day);
-                    });
-                    map.removeLayer(layer);
-                  } else {
-                    layer.setStyle({
-                      color: '#2563eb',
-                      weight: 3,
-                      opacity: 1
-                    });
-                    layer.bindPopup(`<strong>${name}</strong><br>${dayInfo.jour}`);
-                    layer.on('click', () => showDay(day));
-                  }
-                } else {
-                  console.warn('[KML] No tripData found for day', day);
-                }
-              } else {
-                console.warn('[KML] Invalid day or missing tripData for layer:', name);
-              }
+            if (layer.feature && layer.feature.geometry.type === 'Point') {
+              map.removeLayer(layer);
             } else {
-              console.warn('[KML] Layer without name property:', layer);
-            }
-          });
-          this.eachLayer(function(layer) {
-            if (layer.feature && layer.feature.properties && layer.feature.properties.name) {
-              const name = layer.feature.properties.name.trim();
-              console.log('[KML] Layer name:', name);
-              // Chercher le jour correspondant dans tripData par nom
-              let dayInfo = null;
-              let day = null;
-              if (window.tripData) {
-                dayInfo = window.tripData.find(d => {
-                  // On tente sur le champ 'jour' si le nom du KML est inclus dans la chaîne
-                  if (d.jour && d.jour.toLowerCase().includes(name.toLowerCase())) return true;
-                  return false;
-                });
-                if (dayInfo) {
-                  day = dayInfo.day;
-                  console.log('[KML] Matched KML name', name, 'to tripData day', day, dayInfo);
-                } else {
-                  console.warn('[KML] No tripData match for KML name:', name);
-                }
-              }
-              if (dayInfo && day) {
-                if (layer.feature.geometry.type === 'Point') {
-                  const latlng = layer.getLatLng();
-                  const marker = L.marker(latlng, {
-                    icon: markerManager.createIcon(false)
-                  }).addTo(map);
-                  markerManager.addMarker(day, marker);
-                  console.log('[KML] Marker created for day', day, 'at', latlng);
-                  const popupContent = `
-                    <div class="marker-popup">
-                      <h3 class="font-bold text-lg mb-2">${dayInfo.jour}</h3>
-                      <div class="text-gray-700">${name}</div>
-                    </div>
-                  `;
-                  marker.bindPopup(popupContent, { className: 'custom-popup' });
-                  marker.bindTooltip(dayInfo.jour, { direction: 'top' });
-                  marker.on('click', function() {
-                    markerManager.markers.forEach((m, d) => {
-                      if (m !== marker) m.closePopup();
-                    });
-                    marker.openTooltip();
-                    showDay(day);
-                  });
-                  map.removeLayer(layer);
-                } else {
-                  layer.setStyle({
-                    color: '#2563eb',
-                    weight: 3,
-                    opacity: 1
-                  });
-                  layer.bindPopup(`<strong>${name}</strong><br>${dayInfo.jour || ''}`);
-                  layer.on('click', () => showDay(day));
-                }
-              } else {
-                console.warn('[KML] Ignored layer (no tripData match):', name);
-              }
-            } else {
-              console.warn('[KML] Layer without name property:', layer);
+              layer.setStyle({
+                color: '#2563eb',
+                weight: 3,
+                opacity: 1
+              });
             }
           });
           this.addTo(map);
           map.fitBounds(this.getBounds());
-          // Afficher la navigation et le jour 1 une fois que tout est prêt
           if (window.tripData) {
             renderNavigation(window.tripData);
             await showDay(1);
           }
-      })
-      .on('error', function(error) {
+        })
+        .on('error', function(error) {
           console.error('Error loading KML:', error);
         });
     }
@@ -451,10 +379,28 @@
       }
     }
 
-    // Load detailed day info
-    async function loadDetailedDayInfo() {
+    // Load map points data
+    async function loadMapData() {
       try {
-        console.log('Loading detailed info for day:', currentDay);
+        console.log('Fetching map_data.json...');
+        const response = await fetch('./map_data.json');
+        console.log('Map data response status:', response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log('Map data response text:', text.substring(0, 100) + '...');
+        return JSON.parse(text);
+      } catch (error) {
+        console.error('Error loading map data:', error);
+        return [];
+      }
+    }
+
+    // Load detailed day info
+    async function loadDetailedDayInfo(dayNumber) {
+      try {
+        console.log('Loading detailed info for day:', dayNumber);
         if (!window.detailedData) {
           console.log('Fetching Fiches_Jours_1_a_16_RoadTripUSA2026.json...');
           const response = await fetch('./Fiches_Jours_1_a_16_RoadTripUSA2026.json');
@@ -466,8 +412,8 @@
           console.log('Detailed data response text:', text.substring(0, 100) + '...');
           window.detailedData = JSON.parse(text);
         }
-        console.log('Detailed data for day', currentDay, ':', window.detailedData[currentDay - 1]);
-        return window.detailedData[currentDay - 1];
+        console.log('Detailed data for day', dayNumber, ':', window.detailedData[dayNumber - 1]);
+        return window.detailedData[dayNumber - 1];
       } catch (error) {
         console.error('Error loading detailed data:', error);
         throw error; // Propager l'erreur pour une meilleure gestion
@@ -477,9 +423,10 @@
     // Render navigation
     function renderNavigation(data) {
       const nav = document.getElementById('days-nav');
-      nav.innerHTML = data.map((day, index) => `
-        <button 
+      nav.innerHTML = data.map(day => `
+        <button
           class="day-button ${currentDay === day.day ? 'active' : ''}"
+          data-day="${day.day}"
           onclick="showDay(${day.day})"
         >
           ${day.jour}
@@ -490,12 +437,14 @@
     // Show day content
     async function showDay(dayNumber) {
       try {
-        console.log('Showing day:', dayNumber);
+        // S'assurer que le numéro de jour est bien un entier
+        const dayNum = parseInt(dayNumber, 10);
+        console.log('Showing day:', dayNum);
         console.log('Current tripData:', window.tripData);
-        currentDay = dayNumber;
-        
+        currentDay = dayNum;
+
         // Recherche du jour par son numéro
-        const day = window.tripData.find(d => d.day === dayNumber);
+        const day = window.tripData.find(d => d.day === dayNum);
         console.log('Found day:', day);
         
         if (!day) {
@@ -506,15 +455,15 @@
 
         // Update navigation
         document.querySelectorAll('.day-button').forEach(btn => {
-          btn.classList.toggle('active', parseInt(btn.textContent.split(' ')[1]) === dayNumber);
+          btn.classList.toggle('active', parseInt(btn.dataset.day, 10) === dayNum);
         });
-        const activeBtn = document.querySelector('.day-button.active');
+        const activeBtn = document.querySelector(`.day-button[data-day="${dayNum}"]`);
         if (activeBtn) {
           activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         // Load detailed day info
-        const detailedInfo = await loadDetailedDayInfo(day.day);
+        const detailedInfo = await loadDetailedDayInfo(dayNum);
         if (!detailedInfo) {
           throw new Error('Detailed info not available for day ' + dayNumber);
         }

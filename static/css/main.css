@@ -1,0 +1,128 @@
+/* Menu styling */
+.day-button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+.day-button:hover {
+  background-color: #eff6ff;
+}
+.day-button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+/* Timeline styling */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: #3b82f6;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #3b82f6;
+  border-radius: 9999px;
+  left: -28px;
+  margin-top: 0.5rem;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 1rem);
+  background-color: #e5e7eb;
+  left: -24px;
+  top: 1rem;
+  z-index: -1;
+}
+
+.timeline-item:last-child::after {
+  display: none;
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+  .side-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  .side-nav.show {
+    transform: translateX(0);
+  }
+}
+
+/* Map marker styles */
+.custom-marker {
+  width: 20px;
+  height: 20px;
+  background-color: #2563eb;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.custom-marker.active {
+  background-color: #dc2626;
+  transform: scale(1.2);
+}
+
+/* Custom popup styles */
+.custom-popup .leaflet-popup-content-wrapper {
+  background: white;
+  color: #1f2937;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 8px 12px;
+  min-width: 200px;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.custom-popup .leaflet-popup-close-button {
+  padding: 8px;
+  color: #4b5563;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.marker-popup h3 {
+  color: #1f2937;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.marker-popup .text-gray-700 {
+  line-height: 1.5;
+}
+
+/* Photo lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+

@@ -305,14 +305,15 @@
                       <div class="marker-popup">
                         <h3 class="font-bold text-lg mb-2">${dayInfo.jour}</h3>
                         <div class="text-gray-700">Jour ${day}</div>
-                        <div class="text-gray-700 mt-2">${dayInfo.title || ''}</div>
                       </div>
                     `;
                     marker.bindPopup(popupContent, { className: 'custom-popup' });
+                    marker.bindTooltip(dayInfo.jour, { direction: 'top' });
                     marker.on('click', function() {
                       markerManager.markers.forEach((m, d) => {
                         if (m !== marker) m.closePopup();
                       });
+                      marker.openTooltip();
                       showDay(day);
                     });
                     map.removeLayer(layer);
@@ -322,7 +323,7 @@
                       weight: 3,
                       opacity: 1
                     });
-                    layer.bindPopup(`<strong>${name}</strong><br>${dayInfo.title}`);
+                    layer.bindPopup(`<strong>${name}</strong><br>${dayInfo.jour}`);
                     layer.on('click', () => showDay(day));
                   }
                 } else {
@@ -339,16 +340,12 @@
             if (layer.feature && layer.feature.properties && layer.feature.properties.name) {
               const name = layer.feature.properties.name.trim();
               console.log('[KML] Layer name:', name);
-              // Chercher le jour correspondant dans tripData par titre ou nom
+              // Chercher le jour correspondant dans tripData par nom
               let dayInfo = null;
               let day = null;
               if (window.tripData) {
-                // On cherche une correspondance exacte sur le titre (champ 'title' ou 'ville' ou similaire)
                 dayInfo = window.tripData.find(d => {
-                  // On teste plusieurs champs possibles
-                  if (d.title && d.title.trim().toLowerCase() === name.toLowerCase()) return true;
-                  if (d.ville && d.ville.trim().toLowerCase() === name.toLowerCase()) return true;
-                  // On tente aussi sur le champ 'jour' si le nom du KML est inclus dans la chaîne
+                  // On tente sur le champ 'jour' si le nom du KML est inclus dans la chaîne
                   if (d.jour && d.jour.toLowerCase().includes(name.toLowerCase())) return true;
                   return false;
                 });
@@ -371,14 +368,15 @@
                     <div class="marker-popup">
                       <h3 class="font-bold text-lg mb-2">${dayInfo.jour}</h3>
                       <div class="text-gray-700">${name}</div>
-                      <div class="text-gray-700 mt-2">${dayInfo.title || ''}</div>
                     </div>
                   `;
                   marker.bindPopup(popupContent, { className: 'custom-popup' });
+                  marker.bindTooltip(dayInfo.jour, { direction: 'top' });
                   marker.on('click', function() {
                     markerManager.markers.forEach((m, d) => {
                       if (m !== marker) m.closePopup();
                     });
+                    marker.openTooltip();
                     showDay(day);
                   });
                   map.removeLayer(layer);
@@ -388,7 +386,7 @@
                     weight: 3,
                     opacity: 1
                   });
-                  layer.bindPopup(`<strong>${name}</strong><br>${dayInfo.title || ''}`);
+                  layer.bindPopup(`<strong>${name}</strong><br>${dayInfo.jour || ''}`);
                   layer.on('click', () => showDay(day));
                 }
               } else {
@@ -510,6 +508,10 @@
         document.querySelectorAll('.day-button').forEach(btn => {
           btn.classList.toggle('active', parseInt(btn.textContent.split(' ')[1]) === dayNumber);
         });
+        const activeBtn = document.querySelector('.day-button.active');
+        if (activeBtn) {
+          activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
         // Load detailed day info
         const detailedInfo = await loadDetailedDayInfo(day.day);
@@ -554,9 +556,9 @@
       // Update photos
       const photosGrid = document.getElementById('photos-grid');
       photosGrid.innerHTML = `
-        <img 
-          src="jour${day.day}${day.day === 1 ? '.jpg' : '.png'}" 
-          alt="${day.title}" 
+        <img
+          src="jour${day.day}${day.day === 1 ? '.jpg' : '.png'}"
+          alt="${detailedInfo.photo}"
           class="w-full h-[calc(100vh-200px)] object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity shadow-lg"
           onclick="openLightbox('jour${day.day}${day.day === 1 ? '.jpg' : '.png'}')"
           onerror="this.style.display='none'"
@@ -605,7 +607,10 @@
         map.flyTo(latlng, 10, { animate: true, duration: 1 });
         // Fermer tous les popups puis ouvrir celui du marqueur actif
         markerManager.markers.forEach(m => m.closePopup());
-        setTimeout(() => activeMarker.openPopup(), 500);
+        setTimeout(() => {
+          activeMarker.openPopup();
+          activeMarker.openTooltip();
+        }, 500);
       } catch (error) {
         console.error('Error updating active marker:', error);
       }

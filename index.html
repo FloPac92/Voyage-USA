@@ -266,25 +266,24 @@
     
     // Initialize map
     async function initMap() {
-      // Charger les données des jours et des points de carte
-      window.tripData = await loadDayData();
-      window.mapPoints = await loadMapData();
+      // Charger toutes les données (jours et points de carte)
+      window.tripData = await loadTripData();
 
       map = L.map('map-container').setView([36.17, -115.90], 4);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      // Créer les marqueurs depuis map_data.json
-      if (Array.isArray(window.mapPoints)) {
-        window.mapPoints.forEach(point => {
+      // Créer les marqueurs depuis les données
+      if (Array.isArray(window.tripData)) {
+        window.tripData.forEach(point => {
           const marker = L.marker([point.lat, point.lng], {
             icon: markerManager.createIcon(false)
           }).addTo(map);
           markerManager.addMarker(point.day, marker);
           const popupContent = `
             <div class="marker-popup">
-              <h3 class="font-bold text-lg mb-2">${point.title}</h3>
+              <h3 class="font-bold text-lg mb-2">${point.name}</h3>
               <div class="text-gray-700">Jour ${point.day}</div>
             </div>
           `;
@@ -338,85 +337,26 @@
     }
 
     // Load day data
-    async function loadDayData() {
+    // Charger toutes les informations du voyage
+    async function loadTripData() {
       try {
-        console.log('Fetching itinerary.json...');
-        const response = await fetch('./itinerary.json');
+        console.log('Fetching Fiches_Jours_1_a_16_RoadTripUSA2026.json...');
+        const response = await fetch('./Fiches_Jours_1_a_16_RoadTripUSA2026.json');
         console.log('Response status:', response.status);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const text = await response.text();
-        console.log('Response text:', text.substring(0, 100) + '...');
-        let data = JSON.parse(text);
-        
-        // Ajouter le numéro du jour à chaque élément
-        if (Array.isArray(data)) {
-          data = data.map((item, index) => {
-            // Extraire le numéro du jour de la propriété 'jour'
-            const dayMatch = item.jour.match(/Jour (\d+)/);
-            const day = dayMatch ? parseInt(dayMatch[1]) : index + 1;
-            return { ...item, day };
-          });
-        } else if (typeof data === 'object') {
-          // Si c'est un objet, le convertir en tableau
-          data = Object.values(data).map((item, index) => {
-            const dayMatch = item.jour.match(/Jour (\d+)/);
-            const day = dayMatch ? parseInt(dayMatch[1]) : index + 1;
-            return { ...item, day };
-          });
-        }
-        console.log('Processed trip data:', data);
-        return data;
+        console.log('Trip data response text:', text.substring(0, 100) + '...');
+        return JSON.parse(text);
       } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('Error loading trip data:', error);
         document.getElementById('day-content').innerHTML = `
           <div class="text-red-600 p-4">
             Erreur de chargement : ${error.message}
           </div>
         `;
-        return null;
-      }
-    }
-
-    // Load map points data
-    async function loadMapData() {
-      try {
-        console.log('Fetching map_data.json...');
-        const response = await fetch('./map_data.json');
-        console.log('Map data response status:', response.status);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const text = await response.text();
-        console.log('Map data response text:', text.substring(0, 100) + '...');
-        return JSON.parse(text);
-      } catch (error) {
-        console.error('Error loading map data:', error);
         return [];
-      }
-    }
-
-    // Load detailed day info
-    async function loadDetailedDayInfo(dayNumber) {
-      try {
-        console.log('Loading detailed info for day:', dayNumber);
-        if (!window.detailedData) {
-          console.log('Fetching itinerary.json...');
-          const response = await fetch('./itinerary.json');
-          console.log('Detailed data response status:', response.status);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const text = await response.text();
-          console.log('Detailed data response text:', text.substring(0, 100) + '...');
-          window.detailedData = JSON.parse(text);
-        }
-        console.log('Detailed data for day', dayNumber, ':', window.detailedData[dayNumber - 1]);
-        return window.detailedData[dayNumber - 1];
-      } catch (error) {
-        console.error('Error loading detailed data:', error);
-        throw error; // Propager l'erreur pour une meilleure gestion
       }
     }
 
@@ -462,60 +402,57 @@
           activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        // Load detailed day info
-        const detailedInfo = await loadDetailedDayInfo(dayNum);
-        if (!detailedInfo) {
-          throw new Error('Detailed info not available for day ' + dayNumber);
-        }
+        // Utiliser directement les données du jour
+        const detailedInfo = day;
 
-      // Update content
-      document.getElementById('day-title').textContent = detailedInfo.jour;
-      document.getElementById('wake-up').textContent = detailedInfo.wake;
-      document.getElementById('sleep').textContent = detailedInfo.sleep;
-      document.getElementById('distance').textContent = detailedInfo.travel;
+        // Update content
+        document.getElementById('day-title').textContent = detailedInfo.jour || `Jour ${detailedInfo.day}`;
+        document.getElementById('wake-up').textContent = detailedInfo.wake || '';
+        document.getElementById('sleep').textContent = detailedInfo.sleep || '';
+        document.getElementById('distance').textContent = detailedInfo.travel || '';
 
-      // Update description
-      const description = `
-        <div class="mb-6 text-gray-700">
-          ${detailedInfo.explication}
-        </div>
-      `;
+        // Update description
+        const description = `
+          <div class="mb-6 text-gray-700">
+            ${detailedInfo.explication || ''}
+          </div>
+        `;
 
-      // Update timeline
-      const timeline = `
-        <div class="space-y-4">
-          ${detailedInfo.agenda.map(item => {
-            const [time, activity] = item.split(' : ');
-            return `
-              <div class="timeline-item relative pl-4">
-                <div class="flex items-start">
-                  <span class="text-blue-600 font-medium w-32 shrink-0">${time}</span>
-                  <span class="text-gray-700">${activity}</span>
+        // Update timeline
+        const timeline = `
+          <div class="space-y-4">
+            ${(detailedInfo.agenda || []).map(item => {
+              const [time, activity] = item.split(' : ');
+              return `
+                <div class="timeline-item relative pl-4">
+                  <div class="flex items-start">
+                    <span class="text-blue-600 font-medium w-32 shrink-0">${time}</span>
+                    <span class="text-gray-700">${activity}</span>
+                  </div>
                 </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
+              `;
+            }).join('')}
+          </div>
+        `;
 
-      // Update activities list
-      const activitiesList = document.getElementById('activities-list');
-      activitiesList.innerHTML = description + timeline;
+        // Update activities list
+        const activitiesList = document.getElementById('activities-list');
+        activitiesList.innerHTML = description + timeline;
 
-      // Update photos
-      const photosGrid = document.getElementById('photos-grid');
-      photosGrid.innerHTML = `
-        <img
-          src="jour${day.day}${day.day === 1 ? '.jpg' : '.png'}"
-          alt="${detailedInfo.photo}"
-          class="w-full h-[calc(100vh-200px)] object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity shadow-lg"
-          onclick="openLightbox('jour${day.day}${day.day === 1 ? '.jpg' : '.png'}')"
-          onerror="this.style.display='none'"
-        >
-      `;
+        // Update photos
+        const photosGrid = document.getElementById('photos-grid');
+        photosGrid.innerHTML = `
+          <img
+            src="jour${day.day}${day.day === 1 ? '.jpg' : '.png'}"
+            alt="${detailedInfo.photo}"
+            class="w-full h-[calc(100vh-200px)] object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity shadow-lg"
+            onclick="openLightbox('jour${day.day}${day.day === 1 ? '.jpg' : '.png'}')"
+            onerror="this.style.display='none'"
+          >
+        `;
 
-      // Update map
-      updateMapMarker(day);
+        // Update map
+        updateMapMarker(day);
     } catch (error) {
       console.error('Error showing day:', error);
       document.getElementById('day-content').innerHTML = `
@@ -602,7 +539,7 @@
           document.getElementById('day-content').innerHTML = `
             <div class="text-red-600 p-4">
               Erreur: Impossible de charger les données du voyage.
-              Vérifiez que le fichier itinerary.json est présent.
+              Vérifiez que le fichier Fiches_Jours_1_a_16_RoadTripUSA2026.json est présent.
             </div>
           `;
         }

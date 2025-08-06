@@ -1,5 +1,28 @@
 [
   {
+    "day": 1,
+    "name": "San Francisco",
+    "lat": 37.7749,
+    "lng": -122.4194,
+    "distance": "0 km",
+    "activities": [
+      {
+        "icon": "🛬",
+        "label": "Arrivée et transfert"
+      },
+      {
+        "icon": "🏨",
+        "label": "Installation & lunch"
+      },
+      {
+        "icon": "🌊",
+        "label": "Fisherman's Wharf"
+      },
+      {
+        "icon": "🌅",
+        "label": "Sunset sur la baie"
+      }
+    ],
     "jour": "Jour 1 (Ven 1 mai)",
     "explication": "Vous arrivez à San Francisco en matinée. C’est votre premier contact avec la ville : vous ferez le point à l’hôtel, déjeunerez tranquillement et prendrez le temps de vous acclimater au climat et à l’atmosphère vibrante de la baie.",
     "agenda": [
@@ -15,6 +38,29 @@
     "travel": "aucun"
   },
   {
+    "day": 2,
+    "name": "San Francisco",
+    "lat": 37.7749,
+    "lng": -122.4194,
+    "distance": "0 km",
+    "activities": [
+      {
+        "icon": "🌉",
+        "label": "Golden Gate"
+      },
+      {
+        "icon": "⛴️",
+        "label": "Ferry Alcatraz"
+      },
+      {
+        "icon": "🏮",
+        "label": "Chinatown et cable-car"
+      },
+      {
+        "icon": "🌆",
+        "label": "Twin Peaks"
+      }
+    ],
     "jour": "Jour 2 (Sam 2 mai)",
     "explication": "Journée consacrée aux incontournables : vous traverserez le Golden Gate, visiterez la célèbre prison d’Alcatraz et découvrirez les quartiers emblématiques de la ville.",
     "agenda": [
@@ -32,6 +78,29 @@
     "travel": "aucun"
   },
   {
+    "day": 3,
+    "name": "Monterey",
+    "lat": 36.6002,
+    "lng": -121.8947,
+    "distance": "195 km",
+    "activities": [
+      {
+        "icon": "🛣️",
+        "label": "Highway 1"
+      },
+      {
+        "icon": "🏔️",
+        "label": "Big Sur"
+      },
+      {
+        "icon": "🏖️",
+        "label": "Carmel"
+      },
+      {
+        "icon": "🌊",
+        "label": "Cannery Row"
+      }
+    ],
     "jour": "Jour 3 (Dim 3 mai)",
     "explication": "Vous longez la spectaculaire Highway 1, perçant les falaises et surplombant l’océan. Arrêt à Big Sur pour une pause déjeuner et photo, puis arrivée à Monterey en fin d’après-midi.",
     "agenda": [
@@ -48,6 +117,29 @@
     "travel": "195 km (~3 h 20)"
   },
   {
+    "day": 4,
+    "name": "Yosemite",
+    "lat": 37.8651,
+    "lng": -119.5383,
+    "distance": "280 km",
+    "activities": [
+      {
+        "icon": "🛣️",
+        "label": "Route Sierra"
+      },
+      {
+        "icon": "🏘️",
+        "label": "Oakhurst"
+      },
+      {
+        "icon": "🏔️",
+        "label": "Tunnel View"
+      },
+      {
+        "icon": "🏡",
+        "label": "Lodge"
+      }
+    ],
     "jour": "Jour 4 (Lun 4 mai)",
     "explication": "Départ vers l’est, franchissement de la Sierra Nevada : paysages montagneux variés. En fin de matinée, halte gourmande à Oakhurst puis découverte de Mariposa Grove, ses séquoias géants.",
     "agenda": [
@@ -65,6 +157,29 @@
     "travel": "280 km (~4 h 30)"
   },
   {
+    "day": 5,
+    "name": "Yosemite",
+    "lat": 37.8651,
+    "lng": -119.5383,
+    "distance": "0 km",
+    "activities": [
+      {
+        "icon": "🏔️",
+        "label": "Glacier Point"
+      },
+      {
+        "icon": "💦",
+        "label": "Bridalveil"
+      },
+      {
+        "icon": "🚲",
+        "label": "Vélo"
+      },
+      {
+        "icon": "🔥",
+        "label": "Feu de camp"
+      }
+    ],
     "jour": "Jour 5 (Mar 5 mai)",
     "explication": "Journée entière dans le parc : panoramas emblématiques, randonnées modérées et activités détente. Possibilité de louer des vélos dans la vallée.",
     "agenda": [
@@ -82,6 +197,25 @@
     "travel": "aucun"
   },
   {
+    "day": 6,
+    "name": "Death Valley",
+    "lat": 36.5323,
+    "lng": -116.9325,
+    "distance": "550 km",
+    "activities": [
+      {
+        "icon": "🛣️",
+        "label": "Route Bakersfield"
+      },
+      {
+        "icon": "🏜️",
+        "label": "Zabriskie Point"
+      },
+      {
+        "icon": "🌅",
+        "label": "Badwater sunset"
+      }
+    ],
     "jour": "Jour 6 (Mer 6 mai)",
     "explication": "Départ matinal pour une longue traversée de la Californie centrale en direction du désert. Vous atteindrez la Death Valley en fin d'après-midi pour explorer ses premiers sites au coucher du soleil.",
     "agenda": [
@@ -98,6 +232,21 @@
     "travel": "550 km – 6h30"
   },
   {
+    "day": 7,
+    "name": "Las Vegas",
+    "lat": 36.1699,
+    "lng": -115.1398,
+    "distance": "210 km",
+    "activities": [
+      {
+        "icon": "🏜️",
+        "label": "Dante's View"
+      },
+      {
+        "icon": "🎰",
+        "label": "Strip & spectacle"
+      }
+    ],
     "jour": "Jour 7 (Jeu 7 mai)",
     "explication": "Vous terminez la visite des sites principaux du parc au lever du soleil, avant de prendre la route vers la ville de tous les excès : Las Vegas. Soirée libre sur le Strip pour découvrir ses lumières et spectacles.",
     "agenda": [
@@ -114,6 +263,21 @@
     "travel": "210 km – 2h30"
   },
   {
+    "day": 8,
+    "name": "Zion",
+    "lat": 37.2982,
+    "lng": -113.0263,
+    "distance": "250 km",
+    "activities": [
+      {
+        "icon": "🏜️",
+        "label": "Valley of Fire"
+      },
+      {
+        "icon": "🏔️",
+        "label": "Scenic drive Zion"
+      }
+    ],
     "jour": "Jour 8 (Ven 8 mai)",
     "explication": "Vous quittez le Nevada pour entrer dans l’Utah en traversant le superbe Valley of Fire. Zion vous accueille avec ses falaises rouges et une route panoramique inoubliable.",
     "agenda": [
@@ -130,6 +294,25 @@
     "travel": "250 km – 3h00"
   },
   {
+    "day": 9,
+    "name": "Monument Valley",
+    "lat": 36.9838,
+    "lng": -110.111,
+    "distance": "330 km",
+    "activities": [
+      {
+        "icon": "🥾",
+        "label": "Randos matin"
+      },
+      {
+        "icon": "🛣️",
+        "label": "Route scenic"
+      },
+      {
+        "icon": "🌅",
+        "label": "Sunset Navajo"
+      }
+    ],
     "jour": "Jour 9 (Sam 9 mai)",
     "explication": "Une matinée pour profiter de Zion avant de prendre la route vers l'un des paysages les plus iconiques de l’Ouest : Monument Valley.",
     "agenda": [
@@ -145,6 +328,21 @@
     "travel": "330 km – 4h30"
   },
   {
+    "day": 10,
+    "name": "Page",
+    "lat": 36.9147,
+    "lng": -111.4558,
+    "distance": "195 km",
+    "activities": [
+      {
+        "icon": "🛣️",
+        "label": "Forrest Gump Point"
+      },
+      {
+        "icon": "⛵",
+        "label": "Lake Powell croisière"
+      }
+    ],
     "jour": "Jour 10 (Dim 10 mai)",
     "explication": "Journée panoramique et détendue entre les grands espaces de l’Arizona et les eaux du lac Powell. Une croisière vous attend en fin de journée.",
     "agenda": [
@@ -160,6 +358,25 @@
     "travel": "195 km – 2h30"
   },
   {
+    "day": 11,
+    "name": "Page",
+    "lat": 36.9147,
+    "lng": -111.4558,
+    "distance": "0 km",
+    "activities": [
+      {
+        "icon": "🏜️",
+        "label": "Antelope Canyon"
+      },
+      {
+        "icon": "🌅",
+        "label": "Horseshoe Bend"
+      },
+      {
+        "icon": "⛵",
+        "label": "Sunset marina"
+      }
+    ],
     "jour": "Jour 11 (Lun 11 mai)",
     "explication": "Une journée complète à Page pour découvrir deux merveilles naturelles : le canyon étroit et sculptural d’Antelope, et le célèbre fer à cheval du Colorado.",
     "agenda": [
@@ -175,6 +392,25 @@
     "travel": "aucun"
   },
   {
+    "day": 12,
+    "name": "Grand Canyon",
+    "lat": 36.0544,
+    "lng": -112.1401,
+    "distance": "220 km",
+    "activities": [
+      {
+        "icon": "🚣",
+        "label": "Paddle matin"
+      },
+      {
+        "icon": "🛣️",
+        "label": "Route GC"
+      },
+      {
+        "icon": "🌅",
+        "label": "Desert View sunset"
+      }
+    ],
     "jour": "Jour 12 (Mar 12 mai)",
     "explication": "Vous quittez les eaux du Lake Powell pour rejoindre l’un des sites les plus mythiques des États-Unis : le Grand Canyon.",
     "agenda": [
@@ -190,6 +426,25 @@
     "travel": "220 km – 2h40"
   },
   {
+    "day": 13,
+    "name": "Los Angeles",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "distance": "590 km",
+    "activities": [
+      {
+        "icon": "🌅",
+        "label": "Sunrise GC"
+      },
+      {
+        "icon": "🛣️",
+        "label": "Route 66 Seligman"
+      },
+      {
+        "icon": "🏖️",
+        "label": "Santa Monica"
+      }
+    ],
     "jour": "Jour 13 (Mer 13 mai)",
     "explication": "Lever tôt pour admirer le canyon au lever du jour avant d’entamer la traversée vers la côte ouest. Arrêt nostalgique sur la route 66 avant d’arriver à Los Angeles.",
     "agenda": [
@@ -205,6 +460,25 @@
     "travel": "590 km – 6h30"
   },
   {
+    "day": 14,
+    "name": "Los Angeles",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "distance": "0 km",
+    "activities": [
+      {
+        "icon": "🏛️",
+        "label": "Getty Center"
+      },
+      {
+        "icon": "🛶",
+        "label": "Venice Canals"
+      },
+      {
+        "icon": "🌆",
+        "label": "Rooftop DTLA"
+      }
+    ],
     "jour": "Jour 14 (Jeu 14 mai)",
     "explication": "Découverte culturelle et artistique de la Cité des Anges : musées, canaux vénitiens, rooftop branché en soirée.",
     "agenda": [
@@ -220,6 +494,25 @@
     "travel": "aucun"
   },
   {
+    "day": 15,
+    "name": "Los Angeles",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "distance": "0 km",
+    "activities": [
+      {
+        "icon": "🎢",
+        "label": "Universal"
+      },
+      {
+        "icon": "🏖️",
+        "label": "Malibu plage"
+      },
+      {
+        "icon": "🌅",
+        "label": "Griffith sunset"
+      }
+    ],
     "jour": "Jour 15 (Ven 15 mai)",
     "explication": "Journée fun et détente : parc d’attraction, plage, coucher de soleil emblématique depuis Griffith Observatory.",
     "agenda": [
@@ -235,6 +528,25 @@
     "travel": "aucun"
   },
   {
+    "day": 16,
+    "name": "Los Angeles",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "distance": "30 km",
+    "activities": [
+      {
+        "icon": "🍳",
+        "label": "Brunch"
+      },
+      {
+        "icon": "🚗",
+        "label": "Restitution voiture"
+      },
+      {
+        "icon": "✈️",
+        "label": "Vol LAX"
+      }
+    ],
     "jour": "Jour 16 (Sam 16 mai)",
     "explication": "Derniers instants à L.A. pour flâner, faire un brunch ou quelques emplettes avant de rendre la voiture et rejoindre l’aéroport pour votre vol retour.",
     "agenda": [

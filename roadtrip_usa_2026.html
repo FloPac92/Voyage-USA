@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Road Trip USA 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; display: flex; overflow: hidden; }
+    #sidebar { width: 200px; background: #f3f4f6; overflow-y: auto; }
+    #content { flex: 1; overflow-y: auto; padding: 1.5rem; }
+    #sidebar button.active { background-color: #3b82f6; color: white; }
+    #day-content { opacity: 1; transition: opacity .3s; }
+    #day-content.hide { opacity: 0; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Road Trip USA 2026</h1>
+      <nav class="space-x-4 hidden md:flex">
+        <a href="#map" class="hover:underline">Carte</a>
+        <a href="#itinerary" class="hover:underline">Programme</a>
+        <a href="#infos-pratiques" class="hover:underline">Infos pratiques</a>
+      </nav>
+      <button id="btn-menu" class="md:hidden">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="p-4">
+      <h2 class="text-lg font-semibold mb-4">Jours</h2>
+      <div id="nav-buttons" class="space-y-2"></div>
+    </aside>
+
+    <!-- Content -->
+    <section id="content">
+      <!-- Map -->
+      <div id="map-container" class="h-64 mb-6"></div>
+      <p id="map-error" class="text-red-600 hidden">Impossible de charger la carte.</p>
+
+      <!-- Day details -->
+      <div id="day-content" class="" >
+        <!-- Injecté par JS -->
+      </div>
+
+      <!-- Infos pratiques -->
+      <section id="infos-pratiques" class="mt-8">
+        <h2 class="text-xl font-semibold mb-2">Infos pratiques</h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Budget estimé : 2 800 €/personne</li>
+          <li>Météo : Été chaud, prévoir crème solaire et chapeau</li>
+          <li>Transports : Voiture de location incluse, conduite à droite</li>
+          <li>Hébergements : Cabane, lodge, hôtel — réservations incluses</li>
+          <li>Conseil : Télécharger l’application offline Maps.me pour le GPS</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center p-4">
+    © 2025 Voyage USA | Créé avec passion par votre agence
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
+  <script>
+    // Toggle mobile menu (if additional menu items needed)
+    document.getElementById('btn-menu').addEventListener('click', () => {
+      // no mobile nav for now
+    });
+
+    window.onload = async () => {
+      const kmlPath = 'itinary.kml';
+      const jsonPath = 'Fiches_Jours_1_a_16_RoadTripUSA2026.json';
+
+      // Initialize Leaflet map
+      let map;
+      if (window.L) {
+        map = L.map('map-container').setView([36.17, -115.90], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        if (window.omnivore) {
+          omnivore.kml(kmlPath)
+            .on('ready', function() {
+              this.addTo(map);
+              map.fitBounds(this.getBounds());
+            })
+            .on('error', () => document.getElementById('map-error').classList.remove('hidden'));
+        } else {
+          document.getElementById('map-error').classList.remove('hidden');
+        }
+      } else {
+        document.getElementById('map-error').classList.remove('hidden');
+      }
+
+      // Load JSON data
+      let days;
+      try {
+        const res = await fetch(jsonPath);
+        if (!res.ok) throw new Error(res.status);
+        days = await res.json();
+      } catch (e) {
+        console.error('Échec JSON', e);
+        return;
+      }
+
+      // Build sidebar buttons
+      const nav = document.getElementById('nav-buttons');
+      days.forEach((d, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = d.jour;
+        btn.className = 'w-full text-left px-2 py-1 rounded';
+        btn.addEventListener('click', () => displayDay(i));
+        nav.appendChild(btn);
+      });
+
+      // Display first day
+      displayDay(0);
+
+      function displayDay(idx) {
+        // sidebar active
+        Array.from(nav.children).forEach((btn, i) => btn.classList.toggle('active', i === idx));
+        const d = days[idx];
+        // parse description
+        const lines = d.description.split('\n');
+        const reveil = lines.find(l => l.startsWith('Réveil'))?.split(': ')[1] || '';
+        const nuit = lines.find(l => l.startsWith('Coucher') || l.startsWith('Coucher'))?.split(': ')[1] || '';
+        const trajet = lines.find(l => l.startsWith('Trajet'))?.split(': ')[1] || 'Aucun';
+        // fade out content
+        const container = document.getElementById('day-content');
+        container.classList.add('hide');
+        setTimeout(() => {
+          let html = '';
+          html += `<h2 class="text-2xl font-bold mb-2">${d.jour} – ${d.jour}</h2>`;
+          html += `<div class="flex space-x-4 mb-4">
+                     <div>⏰ ${reveil}</div>
+                     <div>🛏️ ${nuit}</div>
+                     <div>🚗 ${trajet}</div>
+                   </div>`;
+          html += `<p class="mb-4">${d.explication}</p>`;
+          html += '<ul class="list-disc list-inside mb-4">';
+          d.agenda.forEach(a => { html += `<li>${a}</li>`; });
+          html += '</ul>';
+          html += `<figure class="mb-4">
+                     <img src="jour${idx+1}.jpg" alt="Photo ${d.jour}" class="rounded mx-auto" />
+                     <figcaption class="text-sm text-center text-gray-500">${d.photo}</figcaption>
+                   </figure>`;
+          container.innerHTML = html;
+          container.classList.remove('hide');
+        }, 300);
+      }
+    };
+  </script>
+</body>
+</html>

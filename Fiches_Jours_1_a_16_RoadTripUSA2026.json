@@ -1,0 +1,219 @@
+[
+  {
+    "jour": "Jour 1 (Ven 1 mai)",
+    "description": "Réveil : —\nCoucher : San Francisco\nTrajet : aucun",
+    "explication": "Vous arrivez à San Francisco en matinée. C’est votre premier contact avec la ville : vous ferez le point à l’hôtel, déjeunerez tranquillement et prendrez le temps de vous acclimater au climat et à l’atmosphère vibrante de la baie.",
+    "agenda": [
+      "10h00 – 12h00 : transfert et installation à l’hôtel",
+      "12h00 – 13h30 : déjeuner dans un café du quartier",
+      "13h30 – 17h00 : balade à Fisherman’s Wharf, dégustation de clam chowder",
+      "17h00 – 19h30 : retour en bord de baie pour admirer le coucher de soleil",
+      "20h00 – 22h00 : dîner dans un restaurant de North Beach"
+    ],
+    "photo": "Le skyline de San Francisco baigné dans la lumière dorée du soir, pris depuis le front de mer."
+  },
+  {
+    "jour": "Jour 2 (Sam 2 mai)",
+    "description": "Réveil : San Francisco\nCoucher : San Francisco\nTrajet : aucun",
+    "explication": "Journée consacrée aux incontournables : vous traverserez le Golden Gate, visiterez la célèbre prison d’Alcatraz et découvrirez les quartiers emblématiques de la ville.",
+    "agenda": [
+      "08h00 – 09h00 : petit-déjeuner à l’hôtel",
+      "09h00 – 11h00 : traversée à pied ou à vélo du Golden Gate Bridge",
+      "11h30 – 14h00 : visite guidée d’Alcatraz (ferry + audio-tour)",
+      "14h00 – 15h00 : déjeuner à Fisherman’s Wharf",
+      "15h00 – 17h00 : plongeon dans Chinatown et balade en cable-car",
+      "17h00 – 19h00 : ascension à Twin Peaks pour le panorama",
+      "19h30 – 21h30 : dîner à Castro ou Mission District"
+    ],
+    "photo": "Le Golden Gate Bridge vu depuis Marin Headlands, voilé de brume matinale."
+  },
+  {
+    "jour": "Jour 3 (Dim 3 mai)",
+    "description": "Réveil : San Francisco\nCoucher : Monterey\nTrajet : 195 km (~3 h 20)",
+    "explication": "Vous longez la spectaculaire Highway 1, perçant les falaises et surplombant l’océan. Arrêt à Big Sur pour une pause déjeuner et photo, puis arrivée à Monterey en fin d’après-midi.",
+    "agenda": [
+      "07h00 – 08h00 : petit-déjeuner et check-out",
+      "08h00 – 10h30 : route vers Big Sur, pause panoramique",
+      "10h30 – 13h00 : exploration de Pfeiffer Beach et déjeuner",
+      "13h00 – 15h30 : poursuite sur la côte jusqu’à Carmel-by-the-Sea",
+      "15h30 – 18h00 : arrivée à Monterey, visite de Cannery Row",
+      "18h00 – 20h00 : dîner face à la baie"
+    ],
+    "photo": "Le Bixby Creek Bridge au soleil couchant, avec l’Océan Pacifique à perte de vue."
+  },
+  {
+    "jour": "Jour 4 (Lun 4 mai)",
+    "description": "Réveil : Monterey\nCoucher : Yosemite\nTrajet : 280 km (~4 h 30)",
+    "explication": "Départ vers l’est, franchissement de la Sierra Nevada : paysages montagneux variés. En fin de matinée, halte gourmande à Oakhurst puis découverte de Mariposa Grove, ses séquoias géants.",
+    "agenda": [
+      "06h30 – 07h30 : petit-déjeuner et départ",
+      "07h30 – 11h00 : route jusqu’à Oakhurst, pause café",
+      "11h00 – 13h00 : Mariposa Grove (sentier des séquoias)",
+      "13h00 – 14h00 : pique-nique ou déjeuner à Wawona",
+      "14h00 – 16h00 : arrivée dans la vallée de Yosemite, installation",
+      "16h00 – 18h00 : petite balade à Yosemite Falls",
+      "19h00 – 21h00 : dîner au Yosemite Lodge"
+    ],
+    "photo": "Le tunnel View au lever du jour, avec El Capitan et Half Dome en toile de fond."
+  },
+  {
+    "jour": "Jour 5 (Mar 5 mai)",
+    "description": "Réveil : Yosemite\nCoucher : Yosemite\nTrajet : aucun",
+    "explication": "Journée entière dans le parc : panoramas emblématiques, randonnées modérées et activités détente. Possibilité de louer des vélos dans la vallée.",
+    "agenda": [
+      "07h30 – 08h30 : petit-déjeuner",
+      "08h30 – 11h30 : randonnée vers Glacier Point",
+      "11h30 – 13h00 : déjeuner pique-nique avec vue",
+      "13h00 – 15h00 : visite de Bridalveil Fall",
+      "15h00 – 17h00 : balade à vélo dans la vallée",
+      "17h00 – 19h00 : retour et moment détente au lodge",
+      "19h30 – 22h00 : feu de camp sous les étoiles"
+    ],
+    "photo": "Le feu de camp crépitant au crépuscule, Half Dome silhouetté."
+  },
+  {
+    "jour": "Jour 6 (Mer 6 mai)",
+    "description": "Réveil : Yosemite\nCoucher : Death Valley\nTrajet : 550 km – 6h30",
+    "explication": "Départ matinal pour une longue traversée de la Californie centrale en direction du désert. Vous atteindrez la Death Valley en fin d'après-midi pour explorer ses premiers sites au coucher du soleil.",
+    "agenda": [
+      "06h00 – 07h00 : petit-déjeuner et départ",
+      "07h00 – 12h30 : route via Bakersfield, arrêts rapides",
+      "12h30 – 13h30 : déjeuner à Ridgecrest",
+      "13h30 – 16h30 : route vers Death Valley",
+      "16h30 – 18h00 : Zabriskie Point au sunset",
+      "18h00 – 20h00 : installation et dîner"
+    ],
+    "photo": "Panorama doré de Zabriskie Point dans la lumière rasante du soir"
+  },
+  {
+    "jour": "Jour 7 (Jeu 7 mai)",
+    "description": "Réveil : Death Valley\nCoucher : Las Vegas\nTrajet : 210 km – 2h30",
+    "explication": "Vous terminez la visite des sites principaux du parc au lever du soleil, avant de prendre la route vers la ville de tous les excès : Las Vegas. Soirée libre sur le Strip pour découvrir ses lumières et spectacles.",
+    "agenda": [
+      "06h00 – 07h30 : lever du soleil à Dante’s View",
+      "07h30 – 09h00 : petit-déjeuner et check-out",
+      "09h00 – 12h00 : route vers Las Vegas",
+      "12h00 – 13h30 : installation + lunch",
+      "13h30 – 18h00 : repos / piscine / shopping",
+      "18h00 – 22h00 : balade sur le Strip, spectacle au Bellagio"
+    ],
+    "photo": "Le Strip de Las Vegas illuminé, capturé depuis une terrasse haute"
+  },
+  {
+    "jour": "Jour 8 (Ven 8 mai)",
+    "description": "Réveil : Las Vegas\nCoucher : Zion\nTrajet : 250 km – 3h00",
+    "explication": "Vous quittez le Nevada pour entrer dans l’Utah en traversant le superbe Valley of Fire. Zion vous accueille avec ses falaises rouges et une route panoramique inoubliable.",
+    "agenda": [
+      "08h00 – 09h00 : petit-déjeuner",
+      "09h00 – 11h00 : route vers Valley of Fire",
+      "11h00 – 13h00 : visite Valley of Fire, déjeuner sur place",
+      "13h00 – 16h00 : route vers Zion NP",
+      "16h00 – 18h30 : scenic drive dans le canyon",
+      "19h00 – 20h30 : dîner à Springdale"
+    ],
+    "photo": "Formations de grès rouge flamboyant à Valley of Fire sous le soleil"
+  },
+  {
+    "jour": "Jour 9 (Sam 9 mai)",
+    "description": "Réveil : Zion\nCoucher : Monument Valley\nTrajet : 330 km – 4h30",
+    "explication": "Une matinée pour profiter de Zion avant de prendre la route vers l'un des paysages les plus iconiques de l’Ouest : Monument Valley.",
+    "agenda": [
+      "07h00 – 10h00 : randonnée The Watchman ou Riverside Walk",
+      "10h00 – 10h30 : brunch rapide",
+      "10h30 – 15h30 : route vers Monument Valley",
+      "15h30 – 18h00 : scenic drive avec guide navajo",
+      "18h00 – 20h00 : coucher de soleil sur les buttes rouges + dîner"
+    ],
+    "photo": "Silhouettes des buttes emblématiques au soleil couchant"
+  },
+  {
+    "jour": "Jour 10 (Dim 10 mai)",
+    "description": "Réveil : Monument Valley\nCoucher : Page\nTrajet : 195 km – 2h30",
+    "explication": "Journée panoramique et détendue entre les grands espaces de l’Arizona et les eaux du lac Powell. Une croisière vous attend en fin de journée.",
+    "agenda": [
+      "07h00 – 08h00 : lever du soleil sur Monument Valley",
+      "08h00 – 10h30 : route vers Page via Forrest Gump Point",
+      "10h30 – 13h00 : repos, lunch, marina",
+      "13h00 – 16h00 : croisière sur le Lake Powell",
+      "17h00 – 19h00 : détente / coucher de soleil"
+    ],
+    "photo": "Reflets du Lake Powell avec ses falaises rouges au crépuscule"
+  },
+  {
+    "jour": "Jour 11 (Lun 11 mai)",
+    "description": "Réveil : Page\nCoucher : Page\nTrajet : aucun",
+    "explication": "Une journée complète à Page pour découvrir deux merveilles naturelles : le canyon étroit et sculptural d’Antelope, et le célèbre fer à cheval du Colorado.",
+    "agenda": [
+      "08h00 – 10h00 : visite guidée Antelope Canyon",
+      "10h30 – 12h00 : Horseshoe Bend à pied",
+      "12h00 – 14h00 : déjeuner et repos",
+      "14h00 – 17h00 : plage ou marina",
+      "18h00 – 20h00 : coucher de soleil sur la rive"
+    ],
+    "photo": "Rayon de lumière filtrant dans Antelope Canyon"
+  },
+  {
+    "jour": "Jour 12 (Mar 12 mai)",
+    "description": "Réveil : Page\nCoucher : Grand Canyon\nTrajet : 220 km – 2h40",
+    "explication": "Vous quittez les eaux du Lake Powell pour rejoindre l’un des sites les plus mythiques des États-Unis : le Grand Canyon.",
+    "agenda": [
+      "07h30 – 09h30 : paddle optionnel ou balade",
+      "09h30 – 12h30 : route vers Grand Canyon",
+      "12h30 – 14h00 : déjeuner et installation",
+      "14h00 – 17h00 : exploration Rim Trail",
+      "17h30 – 20h00 : sunset depuis Desert View"
+    ],
+    "photo": "Couleurs ocres et rouges du Grand Canyon depuis Desert View Watchtower"
+  },
+  {
+    "jour": "Jour 13 (Mer 13 mai)",
+    "description": "Réveil : Grand Canyon\nCoucher : Los Angeles\nTrajet : 590 km – 6h30",
+    "explication": "Lever tôt pour admirer le canyon au lever du jour avant d’entamer la traversée vers la côte ouest. Arrêt nostalgique sur la route 66 avant d’arriver à Los Angeles.",
+    "agenda": [
+      "05h30 – 06h30 : sunrise sur le canyon",
+      "06h30 – 12h30 : route vers Seligman (Route 66)",
+      "12h30 – 14h00 : lunch, balade",
+      "14h00 – 18h30 : arrivée à Santa Monica",
+      "19h00 – 21h00 : dîner sur la plage"
+    ],
+    "photo": "Santa Monica Pier au crépuscule, grande roue illuminée"
+  },
+  {
+    "jour": "Jour 14 (Jeu 14 mai)",
+    "description": "Réveil : Los Angeles\nCoucher : Los Angeles\nTrajet : aucun",
+    "explication": "Découverte culturelle et artistique de la Cité des Anges : musées, canaux vénitiens, rooftop branché en soirée.",
+    "agenda": [
+      "08h00 – 09h00 : petit-déjeuner",
+      "09h00 – 12h00 : Getty Center",
+      "12h00 – 14h00 : lunch Venice",
+      "14h00 – 17h00 : balade dans les Canaux + plage",
+      "18h00 – 21h00 : cocktail en rooftop Downtown"
+    ],
+    "photo": "Reflet des canaux de Venice au soleil couchant"
+  },
+  {
+    "jour": "Jour 15 (Ven 15 mai)",
+    "description": "Réveil : Los Angeles\nCoucher : Los Angeles\nTrajet : aucun",
+    "explication": "Journée fun et détente : parc d’attraction, plage, coucher de soleil emblématique depuis Griffith Observatory.",
+    "agenda": [
+      "08h00 – 09h00 : petit-déjeuner",
+      "09h00 – 13h30 : Universal Studios",
+      "13h30 – 15h30 : route + lunch à Malibu",
+      "15h30 – 17h30 : baignade / repos",
+      "18h00 – 21h00 : sunset à Griffith Observatory"
+    ],
+    "photo": "Observatoire de Griffith avec L.A. illuminée en contrebas"
+  },
+  {
+    "jour": "Jour 16 (Sam 16 mai)",
+    "description": "Réveil : Los Angeles\nCoucher : ✈️ Retour\nTrajet : 30 km – 0h45",
+    "explication": "Derniers instants à L.A. pour flâner, faire un brunch ou quelques emplettes avant de rendre la voiture et rejoindre l’aéroport pour votre vol retour.",
+    "agenda": [
+      "08h00 – 10h00 : petit-déjeuner + brunch",
+      "10h00 – 12h00 : shopping ou balade",
+      "12h00 – 13h00 : restitution voiture",
+      "13h00 – 15h00 : enregistrement et vol"
+    ],
+    "photo": "Vue aérienne de LAX avec un avion au décollage"
+  }
+]

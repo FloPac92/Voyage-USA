@@ -1,0 +1,31 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+#side-nav {
+  width: 200px;
+  background: #f3f4f6;
+  overflow-y: auto;
+}
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+#side-nav button.active {
+  background-color: #3b82f6;
+  color: white;
+}
+#day-content {
+  opacity: 1;
+  transition: opacity .3s;
+}
+#day-content.hide {
+  opacity: 0;
+}

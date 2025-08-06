@@ -293,7 +293,6 @@ window.addEventListener('load', async () => {
     
     // Données déjà chargées dans initMap
     console.log('Trip data loaded:', window.tripData);
-    console.log('Trip data loaded:', window.tripData);
     
     // La navigation et l'affichage du jour 1 sont maintenant gérés après le chargement du KML
     if (!window.tripData) {

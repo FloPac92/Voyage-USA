@@ -101,8 +101,8 @@ async function initMap() {
 // Charger toutes les informations du voyage
 async function loadTripData() {
   try {
-    console.log('Fetching Fiches_Jours_1_a_16_RoadTripUSA2026.json...');
-    const response = await fetch('./Fiches_Jours_1_a_16_RoadTripUSA2026.json');
+    console.log('Fetching itinerary.json...');
+    const response = await fetch('./itinerary.json');
     console.log('Response status:', response.status);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -300,7 +300,7 @@ window.addEventListener('load', async () => {
       document.getElementById('day-content').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur: Impossible de charger les données du voyage.
-          Vérifiez que le fichier Fiches_Jours_1_a_16_RoadTripUSA2026.json est présent.
+          Vérifiez que le fichier itinerary.json est présent.
         </div>
       `;
     }

@@ -131,11 +131,9 @@
         // sidebar active
         Array.from(nav.children).forEach((btn, i) => btn.classList.toggle('active', i === idx));
         const d = days[idx];
-        // parse description
-        const lines = d.description.split('\n');
-        const reveil = lines.find(l => l.startsWith('Réveil'))?.split(': ')[1] || '';
-        const nuit = lines.find(l => l.startsWith('Coucher') || l.startsWith('Coucher'))?.split(': ')[1] || '';
-        const trajet = lines.find(l => l.startsWith('Trajet'))?.split(': ')[1] || 'Aucun';
+        const reveil = d.wake || '';
+        const nuit = d.sleep || '';
+        const trajet = d.travel || 'Aucun';
         // fade out content
         const container = document.getElementById('day-content');
         container.classList.add('hide');

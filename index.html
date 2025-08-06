@@ -470,9 +470,9 @@
 
       // Update content
       document.getElementById('day-title').textContent = detailedInfo.jour;
-      document.getElementById('wake-up').textContent = detailedInfo.description.split('\n')[0].replace('Réveil : ', '');
-      document.getElementById('sleep').textContent = detailedInfo.description.split('\n')[1].replace('Coucher : ', '');
-      document.getElementById('distance').textContent = detailedInfo.description.split('\n')[2].replace('Trajet : ', '');
+      document.getElementById('wake-up').textContent = detailedInfo.wake;
+      document.getElementById('sleep').textContent = detailedInfo.sleep;
+      document.getElementById('distance').textContent = detailedInfo.travel;
 
       // Update description
       const description = `

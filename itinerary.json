@@ -1,7 +1,7 @@
 [
   {
     "day": 1,
-    "name": "San Francisco",
+    "name": "San Francisco : arrivée entre brume et gratte-ciel",
     "lat": 37.7749,
     "lng": -122.4194,
     "distance": "0 km",
@@ -39,7 +39,7 @@
   },
   {
     "day": 2,
-    "name": "San Francisco",
+    "name": "San Francisco : Golden Gate, Alcatraz et panoramas urbains",
     "lat": 37.7749,
     "lng": -122.4194,
     "distance": "0 km",
@@ -79,7 +79,7 @@
   },
   {
     "day": 3,
-    "name": "Monterey",
+    "name": "Monterey : la mythique Highway 1 et Big Sur",
     "lat": 36.6002,
     "lng": -121.8947,
     "distance": "195 km",
@@ -118,7 +118,7 @@
   },
   {
     "day": 4,
-    "name": "Yosemite",
+    "name": "Yosemite : séquoias géants et première immersion",
     "lat": 37.8651,
     "lng": -119.5383,
     "distance": "280 km",
@@ -158,7 +158,7 @@
   },
   {
     "day": 5,
-    "name": "Yosemite",
+    "name": "Yosemite : randonnées et panoramas de la vallée",
     "lat": 37.8651,
     "lng": -119.5383,
     "distance": "0 km",
@@ -198,7 +198,7 @@
   },
   {
     "day": 6,
-    "name": "Death Valley",
+    "name": "Death Valley : traversée du désert brûlant",
     "lat": 36.5323,
     "lng": -116.9325,
     "distance": "550 km",
@@ -233,7 +233,7 @@
   },
   {
     "day": 7,
-    "name": "Las Vegas",
+    "name": "Las Vegas : éclats de néon sur le Strip",
     "lat": 36.1699,
     "lng": -115.1398,
     "distance": "210 km",
@@ -264,7 +264,7 @@
   },
   {
     "day": 8,
-    "name": "Zion",
+    "name": "Zion : falaises rouges et route panoramique",
     "lat": 37.2982,
     "lng": -113.0263,
     "distance": "250 km",
@@ -295,7 +295,7 @@
   },
   {
     "day": 9,
-    "name": "Monument Valley",
+    "name": "Monument Valley : buttes sacrées au soleil couchant",
     "lat": 36.9838,
     "lng": -110.111,
     "distance": "330 km",
@@ -329,7 +329,7 @@
   },
   {
     "day": 10,
-    "name": "Page",
+    "name": "Page : panoramas et croisière sur le Lake Powell",
     "lat": 36.9147,
     "lng": -111.4558,
     "distance": "195 km",
@@ -359,7 +359,7 @@
   },
   {
     "day": 11,
-    "name": "Page",
+    "name": "Page : Antelope Canyon et Horseshoe Bend",
     "lat": 36.9147,
     "lng": -111.4558,
     "distance": "0 km",
@@ -393,7 +393,7 @@
   },
   {
     "day": 12,
-    "name": "Grand Canyon",
+    "name": "Grand Canyon : vertige sur la Rim Trail",
     "lat": 36.0544,
     "lng": -112.1401,
     "distance": "220 km",
@@ -427,7 +427,7 @@
   },
   {
     "day": 13,
-    "name": "Los Angeles",
+    "name": "Los Angeles : de la Route 66 aux plages de Santa Monica",
     "lat": 34.0522,
     "lng": -118.2437,
     "distance": "590 km",
@@ -461,7 +461,7 @@
   },
   {
     "day": 14,
-    "name": "Los Angeles",
+    "name": "Los Angeles : Getty Center et canaux de Venice",
     "lat": 34.0522,
     "lng": -118.2437,
     "distance": "0 km",
@@ -495,7 +495,7 @@
   },
   {
     "day": 15,
-    "name": "Los Angeles",
+    "name": "Los Angeles : Universal Studios, Malibu et sunset à Griffith",
     "lat": 34.0522,
     "lng": -118.2437,
     "distance": "0 km",
@@ -529,7 +529,7 @@
   },
   {
     "day": 16,
-    "name": "Los Angeles",
+    "name": "Los Angeles : brunch final et vol retour",
     "lat": 34.0522,
     "lng": -118.2437,
     "distance": "30 km",

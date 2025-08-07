@@ -123,7 +123,7 @@ async function loadTripData() {
 
 // Render navigation
 function renderNavigation(data) {
-  const nav = document.getElementById('days-nav');
+  const nav = document.getElementById('sidebar-programme');
   nav.innerHTML = data.map(day => `
     <button
       class="day-button ${currentDay === day.day ? 'active' : ''}"

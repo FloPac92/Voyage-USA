@@ -1,5 +1,5 @@
 window.onload = async () => {
-  const kmlPath = 'usa-roadtrip.kml';
+  const kmlPath = 'circuit-voyage-usa.kml';
   const jsonPath = 'itinerary.json';
 
   // Initialize Leaflet map

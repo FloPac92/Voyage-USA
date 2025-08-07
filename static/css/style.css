@@ -92,9 +92,10 @@ h1, h2, h3, blockquote {
 }
 
 .day-block h3 {
-  color: #2c3e50;
-  font-size: 1.75rem;
-  margin-bottom: 0.75rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #b5651d;
+  margin-bottom: 1rem;
 }
 
 .jour-title {
@@ -103,8 +104,17 @@ h1, h2, h3, blockquote {
 }
 
 .day-block p {
-  line-height: 1.6;
-  margin: 0.75rem 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 1rem 0;
+}
+
+.day-block p + p::before {
+  content: '';
+  display: block;
+  width: 60px;
+  margin: 1.5rem auto;
+  border-top: 1px dashed #d0c4a5;
 }
 
 .fil-ariane {

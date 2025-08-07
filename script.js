@@ -1,29 +1,29 @@
 fetch('itinerary.json')
   .then(r => r.json())
   .then(days => {
-    const container = document.getElementById('programme');
-    days.forEach(d => {
-      const block = document.createElement('div');
-      block.className = 'day-block';
+    const sidebar = document.getElementById('sidebar-programme');
+    const detailContainer = document.getElementById('jour-detail');
 
-      const filArianeText = `Jour ${d.day} sur 16 – ${d.name}`;
-      const filAriane = document.createElement('p');
-      filAriane.className = 'fil-ariane';
-      filAriane.textContent = filArianeText;
-      block.appendChild(filAriane);
+    function showDay(day, button) {
+      sidebar.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+      button.classList.add('selected');
+
+      detailContainer.innerHTML = '';
+      const block = document.createElement('div');
+      block.classList.add('day-block', 'fade-in');
 
       const title = document.createElement('h3');
-      title.textContent = d.jour || `Jour ${d.day}`;
+      title.textContent = day.jour || `Jour ${day.day}`;
       block.appendChild(title);
 
-      if (d.travel && d.travel.trim() !== '' && d.travel.toLowerCase() !== 'aucun') {
+      if (day.travel && day.travel.trim() !== '' && day.travel.toLowerCase() !== 'aucun') {
         const trip = document.createElement('p');
-        trip.textContent = d.travel;
+        trip.textContent = day.travel;
         block.appendChild(trip);
       }
 
       const agenda = document.createElement('ul');
-      d.agenda.forEach(item => {
+      day.agenda.forEach(item => {
         const li = document.createElement('li');
         li.textContent = item;
         agenda.appendChild(li);
@@ -31,20 +31,27 @@ fetch('itinerary.json')
       block.appendChild(agenda);
 
       const desc = document.createElement('p');
-      desc.textContent = d.explication;
+      desc.textContent = day.explication;
       block.appendChild(desc);
 
       const img = document.createElement('img');
-      img.src = `jour${d.day}.jpg`;
-      img.alt = d.photo || title.textContent;
-      img.onerror = () => { img.src = `jour${d.day}.png`; };
+      img.src = `jour${day.day}.jpg`;
+      img.alt = day.photo || title.textContent;
+      img.onerror = () => { img.src = `jour${day.day}.png`; };
       block.appendChild(img);
 
-      container.appendChild(block);
+      detailContainer.appendChild(block);
+    }
 
-      block.querySelectorAll('.fil-ariane').forEach(el => {
-        requestAnimationFrame(() => el.classList.add('loaded'));
-      });
+    days.forEach(d => {
+      const btn = document.createElement('button');
+      btn.textContent = `Jour ${d.day}`;
+      btn.addEventListener('click', () => showDay(d, btn));
+      sidebar.appendChild(btn);
     });
+
+    const firstBtn = sidebar.querySelector('button');
+    if (firstBtn) firstBtn.click();
   })
   .catch(err => console.error('Erreur de chargement du programme', err));
+

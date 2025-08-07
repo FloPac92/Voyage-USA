@@ -35,6 +35,10 @@ fetch('itinerary.json')
       block.appendChild(img);
 
       container.appendChild(block);
+
+      block.querySelectorAll('.fil-ariane').forEach(el => {
+        requestAnimationFrame(() => el.classList.add('loaded'));
+      });
     });
   })
   .catch(err => console.error('Erreur de chargement du programme', err));

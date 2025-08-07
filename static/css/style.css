@@ -143,9 +143,13 @@
   overflow-y: auto;
   background: #f3f4f6;
   padding: 0.5rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-height: calc(100vh - 2rem);
+  position: sticky;
+  top: 1rem;
 }
 
 #sidebar-programme button {

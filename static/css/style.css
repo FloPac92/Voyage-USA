@@ -121,6 +121,10 @@
   margin: 0 auto;
 }
 
+#itineraire {
+  overflow: hidden;
+}
+
 @media (max-width: 640px) {
   .chiffres-cles {
     grid-template-columns: repeat(2, 1fr);
@@ -131,6 +135,7 @@
 #programme {
   display: flex;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 #sidebar-programme {

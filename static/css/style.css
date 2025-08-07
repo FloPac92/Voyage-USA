@@ -123,6 +123,7 @@
   width: 100%;
   display: block;
   margin: 0 auto;
+  min-height: 400px;
 }
 
 /* Leaflet map element */
@@ -140,6 +141,9 @@
 @media (max-width: 640px) {
   .chiffres-cles {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .carte {
+    min-height: 300px;
   }
   .map-container {
     min-height: 300px;

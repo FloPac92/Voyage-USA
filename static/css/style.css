@@ -24,3 +24,26 @@
 }
 .hero-text h1 { font-size: clamp(2rem, 5vw, 4rem); }
 .hero-text p  { margin-top: 1rem; font-size: clamp(1rem, 2.5vw, 1.5rem); }
+
+.day-block {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  max-width: 800px;
+  background: #fff;
+}
+
+.day-block img {
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .day-block {
+    margin: 1rem;
+    padding: 1rem;
+  }
+}

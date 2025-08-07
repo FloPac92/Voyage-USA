@@ -1,5 +1,4 @@
 // Global variables
-let currentDay = 1;
 let map;
 const markerManager = {
   markers: new Map(),
@@ -52,20 +51,17 @@ async function initMap() {
       marker.bindTooltip(`Jour ${point.day}`, { direction: 'top', sticky: true });
       marker.on('mouseover', () => marker.openTooltip());
       marker.on('mouseout', () => marker.closeTooltip());
-      marker.on('click', function() {
-        markerManager.markers.forEach((m, d) => {
-          if (m !== marker) m.closePopup();
-        });
-        marker.openTooltip();
-        showDay(point.day);
-        const navBtn = document.querySelector(`.day-button[data-day="${point.day}"]`);
-        if (navBtn) {
-          document.querySelectorAll('.day-button').forEach(btn => {
-            btn.classList.toggle('active', parseInt(btn.dataset.day, 10) === point.day);
+        marker.on('click', function() {
+          markerManager.markers.forEach(m => {
+            if (m !== marker) m.closePopup();
           });
-          navBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      });
+          marker.openTooltip();
+          showDay(point.day);
+          const navBtn = document.querySelector(`.day-button[data-day="${point.day}"]`);
+          if (navBtn) {
+            navBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
     });
   }
 
@@ -112,126 +108,110 @@ async function loadTripData() {
     return JSON.parse(text);
   } catch (error) {
     console.error('Error loading trip data:', error);
-    document.getElementById('day-content').innerHTML = `
-      <div class="text-red-600 p-4">
-        Erreur de chargement : ${error.message}
-      </div>
-    `;
-    return [];
+      document.getElementById('jour-detail').innerHTML = `
+        <div class="text-red-600 p-4">
+          Erreur de chargement : ${error.message}
+        </div>
+      `;
+      return [];
   }
 }
 
 // Render navigation
 function renderNavigation(data) {
   const nav = document.getElementById('sidebar-programme');
-  nav.innerHTML = data.map(day => `
-    <button
-      class="day-button ${currentDay === day.day ? 'active' : ''}"
-      data-day="${day.day}"
-      onclick="showDay(${day.day})"
-    >
-      ${day.jour}
-    </button>
-  `).join('');
+  nav.innerHTML = '';
+  data.forEach(day => {
+    const btn = document.createElement('button');
+    btn.textContent = `Jour ${day.day}`;
+    btn.classList.add('day-button');
+    btn.dataset.day = day.day;
+    btn.addEventListener('click', () => showDay(day.day, btn));
+    nav.appendChild(btn);
+  });
 }
 
 // Show day content
-async function showDay(dayNumber) {
+function showDay(dayNumber, button) {
   try {
-    // S'assurer que le numéro de jour est bien un entier
     const dayNum = parseInt(dayNumber, 10);
-    console.log('Showing day:', dayNum);
-    console.log('Current tripData:', window.tripData);
-    currentDay = dayNum;
-
-    // Recherche du jour par son numéro
     const day = window.tripData.find(d => d.day === dayNum);
-    console.log('Found day:', day);
-    
     if (!day) {
       console.error('Day not found in tripData:', dayNumber);
-      console.log('Available days:', window.tripData.map(d => d.day));
       return;
     }
 
-    // Update navigation
-    document.querySelectorAll('.day-button').forEach(btn => {
-      btn.classList.toggle('active', parseInt(btn.dataset.day, 10) === dayNum);
+    const sidebar = document.getElementById('sidebar-programme');
+    const detailContainer = document.getElementById('jour-detail');
+
+    sidebar.querySelectorAll('button').forEach(btn => {
+      if (btn !== button) btn.classList.remove('selected');
     });
-    const activeBtn = document.querySelector(`.day-button[data-day="${dayNum}"]`);
-    if (activeBtn) {
-      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    let isSelected = true;
+    if (button) {
+      isSelected = button.classList.toggle('selected');
+    } else {
+      const navBtn = sidebar.querySelector(`button[data-day="${dayNum}"]`);
+      if (navBtn) navBtn.classList.add('selected');
     }
 
-    // Utiliser directement les données du jour
-    const detailedInfo = day;
+    detailContainer.innerHTML = '';
+    if (!isSelected) return;
 
-    // Update content
-    document.getElementById('day-title').textContent = detailedInfo.jour || `Jour ${detailedInfo.day}`;
-    document.getElementById('wake-up').textContent = detailedInfo.wake || '';
-    document.getElementById('sleep').textContent = detailedInfo.sleep || '';
-    document.getElementById('distance').textContent = detailedInfo.travel || '';
+    const block = document.createElement('div');
+    block.classList.add('day-block');
 
-    // Update description
-    const description = `
-      <div class="mb-6 text-gray-700">
-        ${detailedInfo.explication || ''}
-      </div>
-    `;
+    const title = document.createElement('h3');
+    title.textContent = day.jour || `Jour ${day.day}`;
+    block.appendChild(title);
 
-    // Update timeline
-    const timeline = `
-      <div class="space-y-4">
-        ${(detailedInfo.agenda || []).map(item => {
-          const [time, activity] = item.split(' : ');
-          return `
-            <div class="timeline-item relative pl-4">
-              <div class="flex items-start">
-                <span class="text-blue-600 font-medium w-32 shrink-0">${time}</span>
-                <span class="text-gray-700">${activity}</span>
-              </div>
-            </div>
-          `;
-        }).join('')}
-      </div>
-    `;
+    if (day.name) {
+      const poetic = document.createElement('h3');
+      poetic.classList.add('jour-title');
+      poetic.textContent = day.name;
+      block.appendChild(poetic);
+    }
 
-    // Update activities list
-    const activitiesList = document.getElementById('activities-list');
-    activitiesList.innerHTML = description + timeline;
+    if (day.travel && day.travel.trim() !== '' && day.travel.toLowerCase() !== 'aucun') {
+      const trip = document.createElement('p');
+      trip.textContent = day.travel;
+      block.appendChild(trip);
+    }
 
-    // Update photos
-    const photosGrid = document.getElementById('photos-grid');
-    photosGrid.innerHTML = `
-      <img
-        src="jour${day.day}${day.day === 1 ? '.jpg' : '.png'}"
-        alt="${detailedInfo.photo}"
-        class="w-full h-[calc(100vh-200px)] object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity shadow-lg"
-        onclick="openLightbox('jour${day.day}${day.day === 1 ? '.jpg' : '.png'}')"
-        onerror="this.style.display='none'"
-      >
-    `;
+    const agenda = document.createElement('ul');
+    (day.agenda || []).forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      agenda.appendChild(li);
+    });
+    block.appendChild(agenda);
 
-    // Update map
+    const desc = document.createElement('p');
+    desc.textContent = day.explication || '';
+    block.appendChild(desc);
+
+    const img = document.createElement('img');
+    img.src = `jour${day.day}.jpg`;
+    img.alt = day.photo || title.textContent;
+    img.onerror = () => { img.src = `jour${day.day}.png`; };
+    block.appendChild(img);
+
+    detailContainer.appendChild(block);
+    detailContainer.classList.add('fade-in');
+    detailContainer.addEventListener('animationend', () => {
+      detailContainer.classList.remove('fade-in');
+    }, { once: true });
+
     updateMapMarker(day);
-} catch (error) {
-  console.error('Error showing day:', error);
-  document.getElementById('day-content').innerHTML = `
-    <div class="text-red-600 p-4">
-      Erreur lors du chargement du jour ${dayNumber}: ${error.message}
-    </div>
-  `;
-}
-}
-
-// Helper function to create marker icons
-function createMarkerIcon(isActive = false) {
-  return L.divIcon({
-    className: isActive ? 'marker-active' : 'marker-default',
-    html: `<div class="marker-${isActive ? 'active' : 'default'}"></div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12]
-  });
+  } catch (error) {
+    console.error('Error showing day:', error);
+    document.getElementById('jour-detail').innerHTML = `
+      <div class="text-red-600 p-4">
+        Erreur lors du chargement du jour ${dayNumber}: ${error.message}
+      </div>
+    `;
+  }
 }
 
 // Update map marker
@@ -263,16 +243,6 @@ function updateMapMarker(day) {
   }
 }
 
-// Lightbox functions
-function openLightbox(src) {
-  document.getElementById('lightbox').classList.add('active');
-  document.getElementById('lightbox-img').src = src;
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-}
-
 // Mobile menu
 document.getElementById('mobile-menu-button').addEventListener('click', () => {
   const nav = document.getElementById('side-nav');
@@ -296,7 +266,7 @@ window.addEventListener('load', async () => {
     
     // La navigation et l'affichage du jour 1 sont maintenant gérés après le chargement du KML
     if (!window.tripData) {
-      document.getElementById('day-content').innerHTML = `
+      document.getElementById('jour-detail').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur: Impossible de charger les données du voyage.
           Vérifiez que le fichier itinerary.json est présent.
@@ -305,11 +275,11 @@ window.addEventListener('load', async () => {
     }
   } catch (error) {
     console.error('Error during initialization:', error);
-    document.getElementById('day-content').innerHTML = `
-      <div class="text-red-600 p-4">
-        Erreur lors de l'initialisation: ${error.message}
-      </div>
-    `;
+      document.getElementById('jour-detail').innerHTML = `
+        <div class="text-red-600 p-4">
+          Erreur lors de l'initialisation: ${error.message}
+        </div>
+      `;
   }
 });
 

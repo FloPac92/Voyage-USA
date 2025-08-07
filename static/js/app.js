@@ -71,7 +71,7 @@ async function initMap() {
 
   // Charger le tracé KML (sans les points, déjà gérés)
   console.log('Loading KML file...');
-  omnivore.kml('./itinary.kml')
+  omnivore.kml('./usa-roadtrip.kml')
     .on('ready', async function() {
       console.log('KML file loaded successfully');
       this.eachLayer(function(layer) {

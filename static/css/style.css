@@ -113,11 +113,10 @@
   font-size: 2.5rem;
 }
 
+/*. Map container */
 .carte {
   width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: cover;
+  height: 100%;
   display: block;
   margin: 0 auto;
 }
@@ -125,8 +124,5 @@
 @media (max-width: 640px) {
   .chiffres-cles {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .carte {
-    max-height: 300px;
   }
 }

@@ -67,6 +67,11 @@
   margin-bottom: 0.75rem;
 }
 
+.jour-title {
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
 .day-block p {
   line-height: 1.6;
   margin: 0.75rem 0;

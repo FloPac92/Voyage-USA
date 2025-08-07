@@ -19,6 +19,13 @@ fetch('itinerary.json')
       title.textContent = day.jour || `Jour ${day.day}`;
       block.appendChild(title);
 
+      if (day.name) {
+        const poetic = document.createElement('h3');
+        poetic.classList.add('jour-title');
+        poetic.textContent = day.name;
+        block.appendChild(poetic);
+      }
+
       if (day.travel && day.travel.trim() !== '' && day.travel.toLowerCase() !== 'aucun') {
         const trip = document.createElement('p');
         trip.textContent = day.travel;

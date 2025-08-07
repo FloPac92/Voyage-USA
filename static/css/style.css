@@ -157,9 +157,10 @@
   background: #e5e7eb;
 }
 
-#sidebar-programme button.selected {
+.selected {
   background: #3b82f6;
   color: #fff;
+  font-weight: bold;
 }
 
 #jour-detail {

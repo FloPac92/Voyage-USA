@@ -5,10 +5,13 @@ fetch('itinerary.json')
     const detailContainer = document.getElementById('jour-detail');
 
     function showDay(day, button) {
-      sidebar.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
-      button.classList.add('selected');
+      sidebar.querySelectorAll('button').forEach(btn => {
+        if (btn !== button) btn.classList.remove('selected');
+      });
+      const isSelected = button.classList.toggle('selected');
 
       detailContainer.innerHTML = '';
+      if (!isSelected) return;
       const block = document.createElement('div');
       block.classList.add('day-block', 'fade-in');
 

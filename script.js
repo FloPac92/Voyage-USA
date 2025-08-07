@@ -13,7 +13,7 @@ fetch('itinerary.json')
       detailContainer.innerHTML = '';
       if (!isSelected) return;
       const block = document.createElement('div');
-      block.classList.add('day-block', 'fade-in');
+      block.classList.add('day-block');
 
       const title = document.createElement('h3');
       title.textContent = day.jour || `Jour ${day.day}`;
@@ -44,6 +44,10 @@ fetch('itinerary.json')
       block.appendChild(img);
 
       detailContainer.appendChild(block);
+      detailContainer.classList.add('fade-in');
+      detailContainer.addEventListener('animationend', () => {
+        detailContainer.classList.remove('fade-in');
+      }, { once: true });
     }
 
     days.forEach(d => {

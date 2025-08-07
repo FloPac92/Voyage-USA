@@ -6,6 +6,12 @@ fetch('itinerary.json')
       const block = document.createElement('div');
       block.className = 'day-block';
 
+      const filArianeText = `Jour ${d.day} sur 16 – ${d.name}`;
+      const filAriane = document.createElement('p');
+      filAriane.className = 'fil-ariane';
+      filAriane.textContent = filArianeText;
+      block.appendChild(filAriane);
+
       const title = document.createElement('h3');
       title.textContent = d.jour || `Jour ${d.day}`;
       block.appendChild(title);

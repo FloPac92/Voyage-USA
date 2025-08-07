@@ -43,70 +43,8 @@
     <div id="map-container" class="w-full h-full"></div>
   </section>
 
-  <section id="programme" class="min-h-screen relative">
-    <!-- programme dynamique -->
-    <div class="flex">
-      <!-- Side navigation -->
-      <nav id="side-nav" class="side-nav w-72 bg-white shadow-lg h-[calc(100vh-200px)] sticky top-16 overflow-y-auto hidden md:block">
-        <div class="p-6">
-          <div class="text-2xl font-bold mb-6 text-blue-600">Programme du voyage</div>
-          <div id="days-nav" class="space-y-2">
-            <!-- Days navigation will be inserted here -->
-          </div>
-        </div>
-      </nav>
-
-      <!-- Main content area -->
-      <div class="flex-1">
-        <div id="day-content" class="max-w-7xl mx-auto p-6">
-          <div class="flex flex-col md:flex-row md:space-x-8">
-            <!-- Left column: Content -->
-            <div class="flex-1 px-8">
-              <!-- Title and info -->
-              <div class="mb-8">
-                <h2 id="day-title" class="text-4xl font-bold mb-6 text-blue-800"></h2>
-
-                <!-- Travel info icons -->
-                <div class="inline-flex items-center gap-8 px-6 py-4 bg-blue-50 rounded-lg mb-8">
-                  <div class="flex items-center">
-                    <span class="text-2xl mr-3 text-blue-500">⏰</span>
-                    <span id="wake-up" class="text-blue-700"></span>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="text-2xl mr-3 text-blue-500">🏨</span>
-                    <span id="sleep" class="text-blue-700"></span>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="text-2xl mr-3 text-blue-500">🚗</span>
-                    <span id="distance" class="text-blue-700"></span>
-                  </div>
-                </div>
-
-                <!-- Activities -->
-                <div class="prose max-w-none">
-                  <div id="activities-list" class="space-y-6 pl-8">
-                    <!-- Activities will be inserted here -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right column: Photo -->
-            <div class="md:w-1/3 md:sticky md:top-24">
-              <div id="photos-grid" class="sticky top-24">
-                <!-- Photos will be inserted here -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Photo lightbox -->
-    <div id="lightbox" class="lightbox">
-      <img id="lightbox-img" class="max-h-[90vh] max-w-[90vw] object-contain" src="" alt="">
-      <button class="absolute top-4 right-4 text-white text-4xl" onclick="closeLightbox()">&times;</button>
-    </div>
+  <section id="programme">
+    <!-- Le programme sera injecté dynamiquement ici -->
   </section>
 
   <section id="infos"></section>
@@ -120,5 +58,6 @@
   <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
   <script src="static/js/common.js"></script>
   <script src="static/js/app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

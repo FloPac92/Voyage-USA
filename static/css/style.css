@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+/* Global typography */
+body, p, nav, nav a, footer, ul, li, figcaption, small, span {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, blockquote {
+  font-family: 'Playfair Display', serif;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #d97706;
+}
+
 .hero {
   position: relative;
   height: 100vh;

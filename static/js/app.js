@@ -25,10 +25,10 @@ async function initMap() {
   // Charger toutes les données (jours et points de carte)
   window.tripData = await loadTripData();
 
-  map = L.map('map-container').setView([36.17, -115.90], 4);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+  map = createMap('map-container', {
+    center: [36.17, -115.90],
+    zoom: 4
+  });
 
   // Créer les marqueurs depuis les données
   const coordMap = new Map();
@@ -245,19 +245,10 @@ function showDay(dayNumber, button) {
         ? day.steps
         : [{ lat: day.lat, lng: day.lng }];
     const latlngs = points.map(p => [p.lat, p.lng]);
-    mini = L.map(miniMap, {
+    mini = createMap(miniMap, {
       attributionControl: false,
-      zoomControl: true,
-      dragging: true,
-      scrollWheelZoom: true,
-      doubleClickZoom: true,
-      boxZoom: true,
-      keyboard: true
+      interactive: false
     });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(mini);
 
     latlngs.forEach(coord => {
       L.marker(coord)

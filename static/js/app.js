@@ -136,14 +136,24 @@ async function loadTripData() {
 function renderNavigation(data) {
   const nav = document.getElementById('programme-menu');
   nav.innerHTML = '';
+  const list = document.createElement('ul');
+  list.setAttribute('role', 'listbox');
+
   data.forEach(day => {
+    const listItem = document.createElement('li');
     const btn = document.createElement('button');
     btn.textContent = `Jour ${day.day}`;
     btn.classList.add('day-button');
     btn.dataset.day = day.day;
+    btn.setAttribute('role', 'option');
+    btn.setAttribute('tabindex', '0');
+    btn.setAttribute('aria-selected', 'false');
     btn.addEventListener('click', () => showDay(day.day, btn));
-    nav.appendChild(btn);
+    listItem.appendChild(btn);
+    list.appendChild(listItem);
   });
+
+  nav.appendChild(list);
 }
 
 // Show day content
@@ -165,10 +175,14 @@ function showDay(dayNumber, button) {
       miniMap.remove();
     }
     miniMapContainer.innerHTML = '';
-    sidebar.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+    sidebar.querySelectorAll('button').forEach(btn => {
+      btn.classList.remove('selected');
+      btn.setAttribute('aria-selected', 'false');
+    });
     const targetBtn = button || sidebar.querySelector(`button[data-day="${dayNum}"]`);
     if (targetBtn) {
       targetBtn.classList.add('selected');
+      targetBtn.setAttribute('aria-selected', 'true');
       targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 

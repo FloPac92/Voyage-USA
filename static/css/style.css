@@ -206,9 +206,9 @@ h1, h2, h3, blockquote {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .chiffres-cles {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 

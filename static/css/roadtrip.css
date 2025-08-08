@@ -11,6 +11,7 @@ main {
   flex: 1;
   display: flex;
   overflow: hidden;
+  gap: 1.5rem;
 }
 #side-nav {
   width: 200px;
@@ -41,10 +42,14 @@ main {
 
 #itineraire {
   background-color: #f0f9ff;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
 }
 
 #programme {
   background-color: #fff7ed;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
 }
 
 #infos {
@@ -73,5 +78,32 @@ header nav a {
 header nav a:focus,
 header nav a:hover {
   color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  #side-nav {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  #content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #side-nav button {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+  #content {
+    padding: 0.75rem;
+  }
 }
 

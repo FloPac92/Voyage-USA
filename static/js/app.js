@@ -72,8 +72,8 @@ async function initMap() {
           markerManager.markers.forEach(m => {
             if (m !== marker) m.closePopup();
           });
+          marker.openPopup();
           marker.openTooltip();
-          showDay(entry.days[0]);
         });
       }
     });

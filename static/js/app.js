@@ -177,24 +177,51 @@ function showDay(dayNumber, button) {
     if (!isSelected) return;
 
     const block = document.createElement('div');
-    block.classList.add('day-block');
+    block.classList.add('day-block', 'day-content');
+
+    const leftCol = document.createElement('div');
+    leftCol.classList.add('left');
+    const rightCol = document.createElement('div');
+    rightCol.classList.add('right');
 
     const title = document.createElement('h3');
     title.textContent = day.jour || `Jour ${day.day}`;
-    block.appendChild(title);
+    leftCol.appendChild(title);
 
     if (day.name) {
       const poetic = document.createElement('h3');
       poetic.classList.add('jour-title');
       poetic.textContent = day.name;
-      block.appendChild(poetic);
+      leftCol.appendChild(poetic);
     }
 
-    if (day.travel && day.travel.trim() !== '' && day.travel.toLowerCase() !== 'aucun') {
-      const trip = document.createElement('p');
-      trip.textContent = day.travel;
-      block.appendChild(trip);
+    if (Array.isArray(day.activities) && day.activities.length > 0) {
+      const travelIcons = document.createElement('div');
+      travelIcons.classList.add('travel-icons');
+      day.activities.forEach(act => {
+        const span = document.createElement('span');
+        span.textContent = act.icon;
+        span.title = act.label;
+        travelIcons.appendChild(span);
+      });
+      leftCol.appendChild(travelIcons);
     }
+
+    const steps = document.createElement('p');
+    const stepParts = [];
+    if (day.wake) stepParts.push(day.wake);
+    if (day.sleep) stepParts.push(day.sleep);
+    if (stepParts.length > 0) {
+      steps.textContent = stepParts.join(' → ');
+      if (day.travel && day.travel.trim() !== '' && day.travel.toLowerCase() !== 'aucun') {
+        steps.textContent += ` (${day.travel})`;
+      }
+      leftCol.appendChild(steps);
+    }
+
+    const desc = document.createElement('p');
+    desc.textContent = day.explication || '';
+    leftCol.appendChild(desc);
 
     const agenda = document.createElement('ul');
     (day.agenda || []).forEach(item => {
@@ -202,17 +229,21 @@ function showDay(dayNumber, button) {
       li.textContent = item;
       agenda.appendChild(li);
     });
-    block.appendChild(agenda);
-
-    const desc = document.createElement('p');
-    desc.textContent = day.explication || '';
-    block.appendChild(desc);
+    leftCol.appendChild(agenda);
 
     const img = document.createElement('img');
+    img.classList.add('jour-image');
     img.src = `jour${day.day}.jpg`;
     img.alt = day.photo || title.textContent;
     img.onerror = () => { img.src = `jour${day.day}.png`; };
-    block.appendChild(img);
+    rightCol.appendChild(img);
+
+    const miniMap = document.createElement('div');
+    miniMap.classList.add('mini-map');
+    rightCol.appendChild(miniMap);
+
+    block.appendChild(leftCol);
+    block.appendChild(rightCol);
 
     detailContainer.appendChild(block);
     detailContainer.classList.add('fade-in');

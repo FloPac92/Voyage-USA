@@ -252,12 +252,17 @@ function showDay(dayNumber, button) {
       zoomControl: true
     });
 
-    points.forEach(step => {
-      const marker = L.marker([step.lat, step.lng]).addTo(mini);
-      if (step.name) {
-        marker.bindPopup(step.name);
+    // Add markers to the mini-map and enable navigation between days
+    points.forEach(point => {
+      const marker = L.marker([point.lat, point.lng]).addTo(mini);
+
+      // Display the point's name when the marker is clicked
+      if (point.name) {
+        marker.bindPopup(point.name);
       }
-      marker.on('click', () => showDay(step.day ?? day.day));
+
+      // Allow quick navigation to the day referenced by the marker
+      marker.on('click', () => showDay(point.day ?? day.day));
     });
 
     if (latlngs.length > 1) {

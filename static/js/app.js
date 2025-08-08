@@ -74,6 +74,7 @@ async function initMap() {
           });
           marker.openPopup();
           marker.openTooltip();
+          showDay(point.day);
         });
       }
     });
@@ -247,17 +248,20 @@ function showDay(dayNumber, button) {
     const latlngs = points.map(p => [p.lat, p.lng]);
     mini = createMap(miniMap, {
       attributionControl: false,
-      interactive: false
+      interactive: true,
+      zoomControl: true
     });
 
-    latlngs.forEach(coord => {
-      L.marker(coord)
-        .addTo(mini)
-        .on('click', () => showDay(day.day));
+    points.forEach(step => {
+      const marker = L.marker([step.lat, step.lng]).addTo(mini);
+      if (step.name) {
+        marker.bindPopup(step.name);
+      }
+      marker.on('click', () => showDay(step.day ?? day.day));
     });
 
     if (latlngs.length > 1) {
-      L.polyline(latlngs).addTo(mini);
+      L.polyline(latlngs, { color: '#2563eb', weight: 3 }).addTo(mini);
     }
 
     const bounds = L.latLngBounds(latlngs);

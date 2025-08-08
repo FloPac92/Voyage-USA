@@ -246,6 +246,7 @@ h1, h2, h3, blockquote {
 /* Programme section layout */
 #programme {
   display: flex;
+  align-items: flex-start;
   gap: 1rem;
   margin-top: 2rem;
 }
@@ -267,7 +268,7 @@ h1, h2, h3, blockquote {
 #sidebar-programme button {
   padding: 0.5rem 0.75rem;
   background: transparent;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   text-align: left;
   cursor: pointer;
   border-radius: 0.375rem;
@@ -279,9 +280,10 @@ h1, h2, h3, blockquote {
 }
 
 .selected {
-  background: #3b82f6;
-  color: #fff;
+  background: #dbeafe;
+  color: #1e3a8a;
   font-weight: bold;
+  border-color: #3b82f6;
 }
 
 #jour-detail {

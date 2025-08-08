@@ -195,6 +195,11 @@ h1, h2, h3, blockquote {
   overflow: hidden;
 }
 
+.itineraire-intro {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 @media (max-width: 640px) {
   .chiffres-cles {
     grid-template-columns: repeat(2, 1fr);

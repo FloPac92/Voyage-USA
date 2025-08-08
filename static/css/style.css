@@ -264,6 +264,12 @@ h1, h2, h3, blockquote {
   .itineraire-wrapper {
     flex-direction: column;
   }
+  #itineraire h2 {
+    font-size: 1.75rem;
+  }
+  #itineraire h3 {
+    font-size: 1.25rem;
+  }
 }
 
 /* Leaflet map element */
@@ -276,9 +282,10 @@ h1, h2, h3, blockquote {
 
 #itineraire {
   overflow: hidden;
-  padding-top: 3rem;
+  padding: 3rem 0;
   border-top: 1px solid #e5e7eb;
   background: #f0f9ff;
+  margin-bottom: 3rem;
 }
 
 .itineraire-intro {
@@ -295,8 +302,9 @@ h1, h2, h3, blockquote {
 #programme {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 2rem;
+  margin: 2rem 0 3rem;
+  padding: 2rem 0;
 }
 
 #sidebar-programme {
@@ -407,6 +415,12 @@ h1, h2, h3, blockquote {
   .day-block img {
     width: 100%;
     height: auto;
+  }
+  #itineraire h2 {
+    font-size: 1.5rem;
+  }
+  #itineraire h3 {
+    font-size: 1rem;
   }
 }
 

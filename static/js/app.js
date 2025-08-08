@@ -244,29 +244,33 @@ function showDay(dayNumber, button) {
       : Array.isArray(day.steps)
         ? day.steps
         : [{ lat: day.lat, lng: day.lng }];
-    const first = points[0];
+    const latlngs = points.map(p => [p.lat, p.lng]);
     mini = L.map(miniMap, {
       attributionControl: false,
-      zoomControl: false,
-      dragging: false,
-      scrollWheelZoom: false,
-      doubleClickZoom: false,
-      boxZoom: false,
-      keyboard: false
-    }).setView([first.lat, first.lng], 6);
+      zoomControl: true,
+      dragging: true,
+      scrollWheelZoom: true,
+      doubleClickZoom: true,
+      boxZoom: true,
+      keyboard: true
+    });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(mini);
 
-    points.forEach(p => {
-      L.marker([p.lat, p.lng]).addTo(mini);
+    latlngs.forEach(coord => {
+      L.marker(coord)
+        .addTo(mini)
+        .on('click', () => showDay(day.day));
     });
 
-    if (points.length > 1) {
-      const bounds = points.map(p => [p.lat, p.lng]);
-      mini.fitBounds(bounds, { padding: [10, 10] });
+    if (latlngs.length > 1) {
+      L.polyline(latlngs).addTo(mini);
     }
+
+    const bounds = L.latLngBounds(latlngs);
+    mini.fitBounds(bounds, { padding: [10, 10] });
 
     block.appendChild(leftCol);
     block.appendChild(rightCol);

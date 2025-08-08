@@ -162,25 +162,60 @@ h1, h2, h3, blockquote {
   }
 }
 
-.chiffres-cles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+
+.itineraire-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
 }
 
-.stat-item {
+.map-zone {
+  flex: 2;
+}
+
+.chiffres-cles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #fff;
   padding: 1rem;
-  background: #f9fafb;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Map wrapper */
-.carte {
-  width: 100%;
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-item .stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-item .icon {
+  font-size: 1.5rem;
+  color: #2563eb;
+}
+
+.stat-item .stat-value {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.stat-item .stat-label {
   display: block;
-  margin: 0 auto;
-  min-height: 400px;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+@media (max-width: 768px) {
+  .itineraire-wrapper {
+    flex-direction: column;
+  }
 }
 
 /* Leaflet map element */
@@ -202,23 +237,7 @@ h1, h2, h3, blockquote {
   max-width: 700px;
   margin: 0 auto;
 }
-
-@media (max-width: 768px) {
-  .chiffres-cles {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 640px) {
-  .chiffres-cles {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .carte {
-    min-height: 300px;
-  }
   .map-container {
     min-height: 300px;
   }

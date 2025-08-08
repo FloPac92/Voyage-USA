@@ -1,6 +1,6 @@
 // Global variables
 let map;
-let mini; // mini-map instance
+let miniMap; // mini-map instance
 const markerManager = {
   markers: new Map(),
   addMarker(day, marker) {
@@ -123,7 +123,7 @@ async function loadTripData() {
     return JSON.parse(text);
   } catch (error) {
     console.error('Error loading trip data:', error);
-      document.getElementById('jour-detail').innerHTML = `
+      document.getElementById('programme-detail').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur de chargement : ${error.message}
         </div>
@@ -157,13 +157,12 @@ function showDay(dayNumber, button) {
     }
 
     const sidebar = document.getElementById('programme-menu');
-    const detailContainer = document.getElementById('jour-detail');
+    const detailContainer = document.getElementById('programme-detail');
     const miniMapContainer = document.getElementById('mini-map');
 
     // Clean previous mini-map instance to avoid memory leaks
-    if (mini) {
-      mini.remove();
-      mini = null;
+    if (miniMap) {
+      miniMap.remove();
     }
     miniMapContainer.innerHTML = '';
     sidebar.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
@@ -173,7 +172,9 @@ function showDay(dayNumber, button) {
       targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    detailContainer.innerHTML = '';
+    Array.from(detailContainer.children).forEach(child => {
+      if (child.id !== 'mini-map') child.remove();
+    });
 
     const block = document.createElement('div');
     block.classList.add('day-block', 'day-content');
@@ -238,49 +239,45 @@ function showDay(dayNumber, button) {
     rightCol.appendChild(img);
 
     // Initialize mini-map for the selected day
-    const points = Array.isArray(day.coords)
-      ? day.coords
-      : Array.isArray(day.steps)
-        ? day.steps
-        : [{ lat: day.lat, lng: day.lng }];
-    const latlngs = points.map(p => [p.lat, p.lng]);
-    mini = createMap(miniMapContainer, {
-      attributionControl: false,
+    miniMap = createMap('mini-map', {
       interactive: true,
       zoomControl: true
     });
 
-    // Add markers to the mini-map and enable navigation between days
-    points.forEach(point => {
-      const marker = L.marker([point.lat, point.lng]).addTo(mini);
-
-      // Display the point's name when the marker is clicked
-      if (point.name) {
-        marker.bindPopup(point.name);
-      }
-
-      // Allow quick navigation to the day referenced by the marker
-      marker.on('click', () => showDay(point.day ?? day.day));
-    });
-
-    if (latlngs.length > 1) {
-      L.polyline(latlngs, { color: '#2563eb', weight: 3 }).addTo(mini);
-    }
-
-    const bounds = L.latLngBounds(latlngs);
-    mini.fitBounds(bounds, { padding: [10, 10] });
+    omnivore.kml('/Voyage-USA/circuit-voyage-usa.kml')
+      .on('ready', function() {
+        const layers = [];
+        this.eachLayer(layer => {
+          const featureDay = parseInt(layer.feature?.properties?.day, 10);
+          if (featureDay === dayNum) {
+            layers.push(layer);
+            layer.addTo(miniMap);
+            if (layer.getLatLng) {
+              layer.on('click', () => showDay(featureDay));
+            }
+          }
+        });
+        if (layers.length) {
+          const group = L.featureGroup(layers);
+          miniMap.fitBounds(group.getBounds(), { padding: [10, 10] });
+        }
+        miniMap.invalidateSize();
+      })
+      .on('error', error => {
+        console.error('Mini-map KML load error', error);
+      });
 
     block.appendChild(leftCol);
     block.appendChild(rightCol);
 
-    detailContainer.appendChild(block);
+    detailContainer.insertBefore(block, miniMapContainer);
     detailContainer.classList.add('fade-in');
     detailContainer.addEventListener('animationend', () => {
       detailContainer.classList.remove('fade-in');
     }, { once: true });
   } catch (error) {
     console.error('Error showing day:', error);
-    document.getElementById('jour-detail').innerHTML = `
+    document.getElementById('programme-detail').innerHTML = `
       <div class="text-red-600 p-4">
         Erreur lors du chargement du jour ${dayNumber}: ${error.message}
       </div>
@@ -312,7 +309,7 @@ window.addEventListener('load', async () => {
     
     // La navigation et l'affichage du jour 1 sont maintenant gérés après le chargement du KML
     if (!window.tripData) {
-      document.getElementById('jour-detail').innerHTML = `
+      document.getElementById('programme-detail').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur: Impossible de charger les données du voyage.
           Vérifiez que le fichier itinerary.json est présent.
@@ -321,7 +318,7 @@ window.addEventListener('load', async () => {
     }
   } catch (error) {
     console.error('Error during initialization:', error);
-      document.getElementById('jour-detail').innerHTML = `
+      document.getElementById('programme-detail').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur lors de l'initialisation: ${error.message}
         </div>

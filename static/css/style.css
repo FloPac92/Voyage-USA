@@ -43,11 +43,11 @@ h1, h2, h3, blockquote {
 
 .card {
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #f3f4f6;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .fade-in {
@@ -78,13 +78,13 @@ h1, h2, h3, blockquote {
 }
 
 .day-block {
-  margin: 2rem auto;
-  max-width: 800px;
+  margin: 2.5rem auto;
+  max-width: 1000px;
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #f3f4f6;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
   animation: slideFadeIn 0.8s ease forwards;
 }
 
@@ -99,7 +99,7 @@ h1, h2, h3, blockquote {
   );
   border: 1px solid #e0d7c3;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .day-block h3 {
@@ -194,10 +194,10 @@ h1, h2, h3, blockquote {
     flex-direction: row;
   }
   .day-content .left {
-    flex: 0 0 70%;
+    flex: 0 0 60%;
   }
   .day-content .right {
-    flex: 0 0 30%;
+    flex: 0 0 40%;
   }
 }
 

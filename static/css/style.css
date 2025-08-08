@@ -154,6 +154,15 @@ h1, h2, h3, blockquote {
   transform: rotate(2deg);
 }
 
+.mini-map {
+  width: 250px;
+  height: 250px;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
 .day-content {
   display: flex;
   flex-direction: column;

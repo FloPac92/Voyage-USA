@@ -317,6 +317,7 @@ h1, h2, h3, blockquote {
 
 #sidebar-programme {
   width: 220px;
+  height: 100vh;
   overflow-y: auto;
   background: #f3f4f6;
   padding: 0.5rem;
@@ -324,9 +325,8 @@ h1, h2, h3, blockquote {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: calc(100vh - 2rem);
   position: sticky;
-  top: 1rem;
+  top: 0;
 }
 
 #sidebar-programme button {
@@ -344,11 +344,11 @@ h1, h2, h3, blockquote {
 }
 
 .selected {
-  background: #2563eb;
+  background: #1e3a8a;
   color: #fff;
   font-weight: bold;
-  border-color: #3b82f6;
-  border-left: 4px solid #1e3a8a;
+  border: 2px solid #1e40af;
+  border-left: 6px solid #0f172a;
 }
 
 #jour-detail {

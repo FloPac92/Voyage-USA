@@ -74,10 +74,6 @@ async function initMap() {
           });
           marker.openTooltip();
           showDay(entry.days[0]);
-          const navBtn = document.querySelector(`.day-button[data-day="${entry.days[0]}"]`);
-          if (navBtn) {
-            navBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
         });
       }
     });
@@ -167,21 +163,14 @@ function showDay(dayNumber, button) {
       mini.remove();
       mini = null;
     }
-
-    sidebar.querySelectorAll('button').forEach(btn => {
-      if (btn !== button) btn.classList.remove('selected');
-    });
-
-    let isSelected = true;
-    if (button) {
-      isSelected = button.classList.toggle('selected');
-    } else {
-      const navBtn = sidebar.querySelector(`button[data-day="${dayNum}"]`);
-      if (navBtn) navBtn.classList.add('selected');
+    sidebar.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+    const targetBtn = button || sidebar.querySelector(`button[data-day="${dayNum}"]`);
+    if (targetBtn) {
+      targetBtn.classList.add('selected');
+      targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     detailContainer.innerHTML = '';
-    if (!isSelected) return;
 
     const block = document.createElement('div');
     block.classList.add('day-block', 'day-content');

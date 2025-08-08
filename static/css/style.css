@@ -193,6 +193,9 @@ h1, h2, h3, blockquote {
 
 #itineraire {
   overflow: hidden;
+  padding-top: 3rem;
+  border-top: 1px solid #e5e7eb;
+  background: #f0f9ff;
 }
 
 .itineraire-intro {

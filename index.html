@@ -97,9 +97,14 @@
     </section>
 
   <section id="programme" class="py-8 mb-8">
-    <h2 class="text-3xl font-bold mb-4 text-center">Notre parcours jour par jour</h2>
-    <div id="sidebar-programme"></div>
-    <div id="jour-detail"></div>
+    <h2 id="programme-title" class="text-3xl font-bold mb-4 text-center">Notre parcours jour par jour</h2>
+    <div class="programme-layout">
+      <aside id="programme-menu" class="programme-menu" aria-label="Jours du programme"></aside>
+      <section id="programme-detail" class="programme-detail">
+        <div id="jour-detail"></div>
+        <div id="mini-map" class="mini-map" aria-label="Mini-carte du jour sélectionné"></div>
+      </section>
+    </div>
   </section>
 
   <section id="infos"></section>

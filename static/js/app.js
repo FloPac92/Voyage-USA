@@ -134,7 +134,7 @@ async function loadTripData() {
 
 // Render navigation
 function renderNavigation(data) {
-  const nav = document.getElementById('sidebar-programme');
+  const nav = document.getElementById('programme-menu');
   nav.innerHTML = '';
   data.forEach(day => {
     const btn = document.createElement('button');
@@ -156,14 +156,16 @@ function showDay(dayNumber, button) {
       return;
     }
 
-    const sidebar = document.getElementById('sidebar-programme');
+    const sidebar = document.getElementById('programme-menu');
     const detailContainer = document.getElementById('jour-detail');
+    const miniMapContainer = document.getElementById('mini-map');
 
     // Clean previous mini-map instance to avoid memory leaks
     if (mini) {
       mini.remove();
       mini = null;
     }
+    miniMapContainer.innerHTML = '';
     sidebar.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
     const targetBtn = button || sidebar.querySelector(`button[data-day="${dayNum}"]`);
     if (targetBtn) {
@@ -235,10 +237,6 @@ function showDay(dayNumber, button) {
     img.onerror = () => { img.src = `jour${day.day}.png`; };
     rightCol.appendChild(img);
 
-    const miniMap = document.createElement('div');
-    miniMap.classList.add('mini-map');
-    rightCol.appendChild(miniMap);
-
     // Initialize mini-map for the selected day
     const points = Array.isArray(day.coords)
       ? day.coords
@@ -246,7 +244,7 @@ function showDay(dayNumber, button) {
         ? day.steps
         : [{ lat: day.lat, lng: day.lng }];
     const latlngs = points.map(p => [p.lat, p.lng]);
-    mini = createMap(miniMap, {
+    mini = createMap(miniMapContainer, {
       attributionControl: false,
       interactive: true,
       zoomControl: true

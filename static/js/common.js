@@ -1,3 +1,5 @@
+const STICKY_OFFSET = 80;
+
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('mobile-menu-button');
   const nav = document.getElementById('side-nav');

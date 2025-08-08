@@ -289,6 +289,14 @@ function showDay(dayNumber, button) {
     detailContainer.addEventListener('animationend', () => {
       detailContainer.classList.remove('fade-in');
     }, { once: true });
+
+    if (button) {
+      const programmeTitle = document.getElementById('programme-title');
+      if (programmeTitle) {
+        const top = programmeTitle.getBoundingClientRect().top + window.scrollY - STICKY_OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
   } catch (error) {
     console.error('Error showing day:', error);
     document.getElementById('programme-detail').innerHTML = `

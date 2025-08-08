@@ -38,60 +38,63 @@
     </div>
   </section>
 
-  <section id="itineraire" class="min-h-[400px] relative z-0 pb-8">
-    <p class="itineraire-intro text-center italic mb-6">
-      À chaque route un souvenir, laissez l'horizon guider votre aventure.
-    </p>
-    <div class="chiffres-cles grid">
-      <div class="stat-item flex gap-4 items-center">
-        <span>📅</span>
-        <div>
-          <strong class="text-blue-600">16&nbsp;jours</strong>
-          <span class="text-sm text-gray-600">Durée</span>
+    <section id="itineraire" class="min-h-[400px] relative z-0 pb-8">
+      <h2 class="text-center text-3xl font-bold mb-4">Notre aventure de 16 jours à travers l’Ouest américain</h2>
+      <p class="itineraire-intro text-center italic mb-6">
+        À chaque route un souvenir, laissez l'horizon guider votre aventure.
+      </p>
+      <div class="itineraire-wrapper">
+        <div class="map-zone flex-1">
+          <h3 class="text-center text-2xl font-semibold mb-4">Notre parcours jour par jour</h3>
+          <!-- Carte interactive chargée depuis static/js/app.js et circuit-voyage-usa.kml -->
+          <div id="map-container" class="map-container w-full"></div>
+        </div>
+        <div class="chiffres-cles">
+          <div class="stat-item">
+            <span class="icon">📅</span>
+            <div class="stat-info">
+              <span class="stat-value">16&nbsp;jours</span>
+              <span class="stat-label">Durée</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">🚗</span>
+            <div class="stat-info">
+              <span class="stat-value">~3&nbsp;500&nbsp;km</span>
+              <span class="stat-label">Distance</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">🏞️</span>
+            <div class="stat-info">
+              <span class="stat-value">10</span>
+              <span class="stat-label">Parcs visités</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">🏙️</span>
+            <div class="stat-info">
+              <span class="stat-value">6</span>
+              <span class="stat-label">Villes étapes</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">📷</span>
+            <div class="stat-info">
+              <span class="stat-value">30+</span>
+              <span class="stat-label">Lieux iconiques</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">📍</span>
+            <div class="stat-info">
+              <span class="stat-value">3</span>
+              <span class="stat-label">États traversés</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="stat-item flex gap-4 items-center">
-        <span>🚗</span>
-        <div>
-          <strong class="text-blue-600">~3&nbsp;500&nbsp;km</strong>
-          <span class="text-sm text-gray-600">Distance</span>
-        </div>
-      </div>
-      <div class="stat-item flex gap-4 items-center">
-        <span>🏞️</span>
-        <div>
-          <strong class="text-blue-600">10</strong>
-          <span class="text-sm text-gray-600">Parcs visités</span>
-        </div>
-      </div>
-      <div class="stat-item flex gap-4 items-center">
-        <span>🏙️</span>
-        <div>
-          <strong class="text-blue-600">6</strong>
-          <span class="text-sm text-gray-600">Villes étapes</span>
-        </div>
-      </div>
-      <div class="stat-item flex gap-4 items-center">
-        <span>📷</span>
-        <div>
-          <strong class="text-blue-600">30+</strong>
-          <span class="text-sm text-gray-600">Lieux iconiques</span>
-        </div>
-      </div>
-      <div class="stat-item flex gap-4 items-center">
-        <span>📍</span>
-        <div>
-          <strong class="text-blue-600">3</strong>
-          <span class="text-sm text-gray-600">États traversés</span>
-        </div>
-      </div>
-    </div>
-    <!-- Carte interactive chargée depuis static/js/app.js et circuit-voyage-usa.kml -->
-    <h3 class="text-center text-2xl font-semibold mb-4">Notre parcours jour par jour</h3>
-    <div class="carte">
-      <div id="map-container" class="map-container w-full"></div>
-    </div>
-  </section>
+    </section>
 
   <section id="programme">
     <div id="sidebar-programme"></div>

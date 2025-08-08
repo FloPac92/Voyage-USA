@@ -1,5 +1,6 @@
 // Global variables
 let map;
+let mini; // mini-map instance
 const markerManager = {
   markers: new Map(),
   addMarker(day, marker) {
@@ -161,6 +162,12 @@ function showDay(dayNumber, button) {
     const sidebar = document.getElementById('sidebar-programme');
     const detailContainer = document.getElementById('jour-detail');
 
+    // Clean previous mini-map instance to avoid memory leaks
+    if (mini) {
+      mini.remove();
+      mini = null;
+    }
+
     sidebar.querySelectorAll('button').forEach(btn => {
       if (btn !== button) btn.classList.remove('selected');
     });
@@ -241,6 +248,36 @@ function showDay(dayNumber, button) {
     const miniMap = document.createElement('div');
     miniMap.classList.add('mini-map');
     rightCol.appendChild(miniMap);
+
+    // Initialize mini-map for the selected day
+    const points = Array.isArray(day.coords)
+      ? day.coords
+      : Array.isArray(day.steps)
+        ? day.steps
+        : [{ lat: day.lat, lng: day.lng }];
+    const first = points[0];
+    mini = L.map(miniMap, {
+      attributionControl: false,
+      zoomControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      keyboard: false
+    }).setView([first.lat, first.lng], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(mini);
+
+    points.forEach(p => {
+      L.marker([p.lat, p.lng]).addTo(mini);
+    });
+
+    if (points.length > 1) {
+      const bounds = points.map(p => [p.lat, p.lng]);
+      mini.fitBounds(bounds, { padding: [10, 10] });
+    }
 
     block.appendChild(leftCol);
     block.appendChild(rightCol);

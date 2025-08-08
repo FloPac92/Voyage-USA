@@ -328,10 +328,11 @@ h1, h2, h3, blockquote {
 }
 
 .selected {
-  background: #dbeafe;
-  color: #1e3a8a;
+  background: #2563eb;
+  color: #fff;
   font-weight: bold;
   border-color: #3b82f6;
+  border-left: 4px solid #1e3a8a;
 }
 
 #jour-detail {

@@ -9,11 +9,6 @@ const markerManager = {
   getMarker(day) {
     return this.markers.get(day);
   },
-  resetAllMarkers() {
-    this.markers.forEach((marker, day) => {
-      marker.setIcon(this.createIcon(false));
-    });
-  },
   createIcon(isActive) {
     return L.divIcon({
       className: '',
@@ -35,33 +30,55 @@ async function initMap() {
   }).addTo(map);
 
   // Créer les marqueurs depuis les données
+  const coordMap = new Map();
   if (Array.isArray(window.tripData)) {
     window.tripData.forEach(point => {
-      const marker = L.marker([point.lat, point.lng], {
-        icon: markerManager.createIcon(false)
-      }).addTo(map);
-      markerManager.addMarker(point.day, marker);
-      const popupContent = `
+      const key = `${point.lat},${point.lng}`;
+      const formatDays = days => `Jour${days.length > 1 ? 's' : ''} ${days.join(', ')}`;
+
+      if (coordMap.has(key)) {
+        const entry = coordMap.get(key);
+        entry.days.push(point.day);
+        markerManager.addMarker(point.day, entry.marker);
+        const dayLabel = formatDays(entry.days);
+        const popupContent = `
         <div class="marker-popup">
-          <h3 class="font-bold text-lg mb-2">${point.name}</h3>
-          <div class="text-gray-700">Jour ${point.day}</div>
+          <h3 class="font-bold text-lg mb-2">${entry.name}</h3>
+          <div class="text-gray-700">${dayLabel}</div>
         </div>
       `;
-      marker.bindPopup(popupContent, { className: 'custom-popup' });
-      marker.bindTooltip(`Jour ${point.day}`, { direction: 'top', sticky: true });
-      marker.on('mouseover', () => marker.openTooltip());
-      marker.on('mouseout', () => marker.closeTooltip());
+        entry.marker.setPopupContent(popupContent);
+        entry.marker.setTooltipContent(dayLabel);
+      } else {
+        const marker = L.marker([point.lat, point.lng], {
+          icon: markerManager.createIcon(false)
+        }).addTo(map);
+        markerManager.addMarker(point.day, marker);
+        const entry = { marker, days: [point.day], name: point.name };
+        coordMap.set(key, entry);
+        const dayLabel = formatDays(entry.days);
+        const popupContent = `
+        <div class="marker-popup">
+          <h3 class="font-bold text-lg mb-2">${point.name}</h3>
+          <div class="text-gray-700">${dayLabel}</div>
+        </div>
+      `;
+        marker.bindPopup(popupContent, { className: 'custom-popup' });
+        marker.bindTooltip(dayLabel, { direction: 'top', sticky: true });
+        marker.on('mouseover', () => marker.openTooltip());
+        marker.on('mouseout', () => marker.closeTooltip());
         marker.on('click', function() {
           markerManager.markers.forEach(m => {
             if (m !== marker) m.closePopup();
           });
           marker.openTooltip();
-          showDay(point.day);
-          const navBtn = document.querySelector(`.day-button[data-day="${point.day}"]`);
+          showDay(entry.days[0]);
+          const navBtn = document.querySelector(`.day-button[data-day="${entry.days[0]}"]`);
           if (navBtn) {
             navBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
         });
+      }
     });
   }
 
@@ -202,8 +219,6 @@ function showDay(dayNumber, button) {
     detailContainer.addEventListener('animationend', () => {
       detailContainer.classList.remove('fade-in');
     }, { once: true });
-
-    updateMapMarker(day);
   } catch (error) {
     console.error('Error showing day:', error);
     document.getElementById('jour-detail').innerHTML = `
@@ -214,34 +229,6 @@ function showDay(dayNumber, button) {
   }
 }
 
-// Update map marker
-function updateMapMarker(day) {
-  try {
-    if (!day || !day.day) {
-      console.error('Invalid day object:', day);
-      return;
-    }
-    const activeMarker = markerManager.getMarker(day.day);
-    if (!activeMarker) {
-      console.error('No marker found for day:', day.day);
-      return;
-    }
-    // Réinitialiser tous les marqueurs et activer le marqueur actif
-    markerManager.resetAllMarkers();
-    activeMarker.setIcon(markerManager.createIcon(true));
-    // Centrer la carte sur le marqueur actif avec animation
-    const latlng = activeMarker.getLatLng();
-    map.flyTo(latlng, 10, { animate: true, duration: 1 });
-    // Fermer tous les popups puis ouvrir celui du marqueur actif
-    markerManager.markers.forEach(m => m.closePopup());
-    setTimeout(() => {
-      activeMarker.openPopup();
-      activeMarker.openTooltip();
-    }, 500);
-  } catch (error) {
-    console.error('Error updating active marker:', error);
-  }
-}
 
 // Mobile menu
 document.getElementById('mobile-menu-button').addEventListener('click', () => {

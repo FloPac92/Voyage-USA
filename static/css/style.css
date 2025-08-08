@@ -155,13 +155,8 @@ h1, h2, h3, blockquote {
 }
 
 .mini-map {
-  width: 100%;
-  max-width: 300px;
-  height: 200px;
-  margin: 0 auto;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  height: 260px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -314,90 +309,46 @@ h1, h2, h3, blockquote {
 }
 
 .programme-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
 }
 
-#programme-menu {
-  width: 220px;
-  height: 100vh;
-  overflow-y: auto;
-  background: #f3f4f6;
-  padding: 0.5rem;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.programme-menu {
   position: sticky;
-  top: 0;
+  top: 80px;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
 }
 
-#programme-detail {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.programme-detail {
+  max-width: 1100px;
+  margin: 0;
 }
 
-#programme-menu button {
-  padding: 0.5rem 0.75rem;
-  background: transparent;
-  border: 2px solid transparent;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  transition: background 0.3s, border 0.3s;
+.day-item:focus {
+  outline: 3px solid #0f172a;
+  outline-offset: 2px;
 }
 
-#programme-menu button:hover {
-  background: #e5e7eb;
-}
-
-.selected {
+.day-item.selected {
   background: #1e3a8a;
   color: #fff;
-  font-weight: bold;
-  border: 2px solid #1e40af;
   border-left: 6px solid #0f172a;
 }
 
-#jour-detail {
-  flex-grow: 1;
-  background: #fff;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-}
-
-#jour-detail img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-}
-
-#jour-detail ul {
-  margin: 0.75rem 0 0 1.25rem;
-  list-style: disc;
+@media (max-width: 900px) {
+  .programme-layout {
+    grid-template-columns: 1fr;
+  }
+  .programme-menu {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 768px) {
-  .programme-layout {
-    flex-direction: column;
-  }
-  #programme-menu {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-  #programme-menu button {
-    flex: 0 0 auto;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
   .hero-text h1 {
     font-size: 2rem;
   }
@@ -414,23 +365,15 @@ h1, h2, h3, blockquote {
   .day-block p {
     font-size: 1rem;
   }
-  #jour-detail {
-    padding: 0.75rem;
-  }
 }
 
 @media (max-width: 480px) {
-  #programme-menu button {
-    padding: 0.5rem;
-    font-size: 0.75rem;
-  }
   .day-block h3 {
     font-size: 1.25rem;
   }
   .day-block p {
     font-size: 0.9rem;
   }
-  #jour-detail img,
   .day-block img {
     width: 100%;
     height: auto;

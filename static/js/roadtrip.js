@@ -5,10 +5,7 @@ window.onload = async () => {
   // Initialize Leaflet map
   let map;
   if (window.L) {
-    map = L.map('map-container').setView([36.17, -115.90], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    map = createMap('map-container', { center: [36.17, -115.90], zoom: 5 });
     if (window.omnivore) {
       omnivore.kml(kmlPath)
         .on('ready', function() {

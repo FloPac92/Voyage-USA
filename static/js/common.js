@@ -1,5 +1,3 @@
-const STICKY_OFFSET = 80;
-
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('mobile-menu-button');
   const nav = document.getElementById('side-nav');
@@ -10,13 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const header = document.querySelector('header');
+  const offset = header ? header.offsetHeight : 0;
+
   const links = document.querySelectorAll('header nav a[href^="#"]');
   links.forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
       if (target) {
-        const top = target.getBoundingClientRect().top + window.scrollY - STICKY_OFFSET;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });

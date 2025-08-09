@@ -2,9 +2,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('mobile-menu-button');
   const nav = document.getElementById('side-nav');
   if (button && nav) {
+    const focusableSelectors = 'a, button, [tabindex]:not([tabindex="-1"])';
     button.addEventListener('click', () => {
-      nav.classList.toggle('hidden');
-      nav.classList.toggle('show');
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (expanded) {
+        nav.classList.remove('show');
+        nav.addEventListener(
+          'transitionend',
+          () => {
+            nav.classList.add('hidden');
+            nav.setAttribute('aria-hidden', 'true');
+            button.focus();
+          },
+          { once: true }
+        );
+      } else {
+        nav.classList.remove('hidden');
+        requestAnimationFrame(() => nav.classList.add('show'));
+        nav.setAttribute('aria-hidden', 'false');
+        const first = nav.querySelector(focusableSelectors);
+        (first || nav).focus();
+      }
+
+      button.setAttribute('aria-expanded', String(!expanded));
     });
   }
 

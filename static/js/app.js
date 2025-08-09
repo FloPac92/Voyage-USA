@@ -1,6 +1,7 @@
 // Global variables
 let map;
 let miniMap; // mini-map instance
+const KML_PATH = './circuit-voyage-usa.kml';
 const markerManager = {
   markers: new Map(),
   addMarker(day, marker) {
@@ -82,7 +83,7 @@ async function initMap() {
 
   // Charger le tracé KML (sans les points, déjà gérés)
   console.log('Loading KML file...');
-  omnivore.kml('./circuit-voyage-usa.kml')
+  omnivore.kml(KML_PATH)
     .on('ready', async function() {
       console.log('KML file loaded successfully');
       this.eachLayer(function(layer) {
@@ -258,7 +259,7 @@ function showDay(dayNumber, button) {
       zoomControl: true
     });
 
-    omnivore.kml('/Voyage-USA/circuit-voyage-usa.kml')
+    omnivore.kml(KML_PATH)
       .on('ready', function() {
         const layers = [];
         this.eachLayer(layer => {

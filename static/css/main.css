@@ -57,7 +57,7 @@
 
 /* Mobile menu */
 @media (max-width: 768px) {
-  #side-nav.side-nav {
+  .side-nav {
     position: fixed;
     inset: 0;
     z-index: 50;

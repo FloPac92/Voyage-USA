@@ -1,31 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('mobile-menu-button');
   const nav = document.getElementById('side-nav');
-  if (button && nav) {
-    const focusableSelectors = 'a, button, [tabindex]:not([tabindex="-1"])';
-    button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
+  const overlay = document.getElementById('menu-overlay');
+  const focusableSelectors = 'a, button, [tabindex]:not([tabindex="-1"])';
+  let lastFocused = null;
 
-      if (expanded) {
-        nav.classList.remove('show');
-        nav.addEventListener(
-          'transitionend',
-          () => {
-            nav.classList.add('hidden');
-            nav.setAttribute('aria-hidden', 'true');
-            button.focus();
-          },
-          { once: true }
-        );
-      } else {
-        nav.classList.remove('hidden');
-        requestAnimationFrame(() => nav.classList.add('show'));
-        nav.setAttribute('aria-hidden', 'false');
-        const first = nav.querySelector(focusableSelectors);
-        (first || nav).focus();
+  function openMenu() {
+    lastFocused = document.activeElement;
+    nav.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      nav.classList.add('show');
+      overlay.classList.add('show');
+    });
+    button.setAttribute('aria-expanded', 'true');
+    nav.setAttribute('aria-hidden', 'false');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    const first = nav.querySelector(focusableSelectors);
+    (first || nav).focus();
+  }
+
+  function closeMenu() {
+    if (!nav.classList.contains('show')) return;
+    nav.classList.remove('show');
+    overlay.classList.remove('show');
+    nav.addEventListener(
+      'transitionend',
+      () => {
+        nav.classList.add('hidden');
+        overlay.classList.add('hidden');
+        nav.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+        button.setAttribute('aria-expanded', 'false');
+        if (lastFocused) lastFocused.focus();
+      },
+      { once: true }
+    );
+  }
+
+  function handleKeydown(e) {
+    if (!nav.classList.contains('show')) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeMenu();
+    } else if (e.key === 'Tab') {
+      const focusable = nav.querySelectorAll(focusableSelectors);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
+    }
+  }
 
-      button.setAttribute('aria-expanded', String(!expanded));
+  if (button && nav && overlay) {
+    button.addEventListener('click', () => {
+      if (button.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', handleKeydown);
+    const desktop = window.matchMedia('(min-width: 768px)');
+    desktop.addEventListener('change', e => {
+      if (e.matches) closeMenu();
     });
   }
 
@@ -40,14 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
       if (target) {
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        const top =
+          target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
-
-      if (button && nav && nav.classList.contains('show')) {
-        nav.classList.remove('show');
-        nav.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
+      if (nav && nav.classList.contains('show')) {
+        closeMenu();
       }
     });
   });

@@ -321,14 +321,14 @@ h1, h2, h3, blockquote {
   gap: 24px;
 }
 
-.days-nav {
+.programme-menu {
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 96px);
   overflow-y: auto;
 }
 
-.day-content {
+.programme-detail {
   max-width: 1100px;
   margin: 0;
 }
@@ -348,7 +348,7 @@ h1, h2, h3, blockquote {
   .programme-layout {
     grid-template-columns: 1fr;
   }
-  .days-nav {
+  .programme-menu {
     position: static;
     top: auto;
     max-height: none;
@@ -358,14 +358,14 @@ h1, h2, h3, blockquote {
     white-space: nowrap;
     margin-bottom: 1rem;
   }
-  #days-nav ul {
+  #programme-menu ul {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     gap: 0.5rem;
     scroll-snap-type: x mandatory;
   }
-  #days-nav li {
+  #programme-menu li {
     flex: 0 0 auto;
     scroll-snap-align: start;
   }

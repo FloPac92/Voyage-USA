@@ -9,6 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.toggle('show');
     });
   }
+
+  const links = document.querySelectorAll('header nav a[href^="#"]');
+  links.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - STICKY_OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
 });
 
 function createMap(container, options = {}) {

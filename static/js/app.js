@@ -125,7 +125,7 @@ async function loadTripData() {
     return JSON.parse(text);
   } catch (error) {
     console.error('Error loading trip data:', error);
-      document.getElementById('programme-detail').innerHTML = `
+      document.getElementById('day-content').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur de chargement : ${error.message}
         </div>
@@ -136,7 +136,7 @@ async function loadTripData() {
 
 // Render navigation
 function renderNavigation(data) {
-  const nav = document.getElementById('programme-menu');
+  const nav = document.getElementById('days-nav');
   nav.innerHTML = '';
   const list = document.createElement('ul');
   list.setAttribute('role', 'listbox');
@@ -168,8 +168,8 @@ function showDay(dayNumber, button) {
       return;
     }
 
-    const sidebar = document.getElementById('programme-menu');
-    const detailContainer = document.getElementById('programme-detail');
+    const sidebar = document.getElementById('days-nav');
+    const detailContainer = document.getElementById('day-content');
     const miniMapContainer = document.getElementById('mini-map');
 
     // Clean previous mini-map instance to avoid memory leaks
@@ -313,7 +313,7 @@ function showDay(dayNumber, button) {
     }
   } catch (error) {
     console.error('Error showing day:', error);
-    document.getElementById('programme-detail').innerHTML = `
+    document.getElementById('day-content').innerHTML = `
       <div class="text-red-600 p-4">
         Erreur lors du chargement du jour ${dayNumber}: ${error.message}
       </div>
@@ -338,7 +338,7 @@ window.addEventListener('load', async () => {
     
     // La navigation et l'affichage du jour 1 sont maintenant gérés après le chargement du KML
     if (!window.tripData) {
-      document.getElementById('programme-detail').innerHTML = `
+      document.getElementById('day-content').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur: Impossible de charger les données du voyage.
           Vérifiez que le fichier itinerary.json est présent.
@@ -347,7 +347,7 @@ window.addEventListener('load', async () => {
     }
   } catch (error) {
     console.error('Error during initialization:', error);
-      document.getElementById('programme-detail').innerHTML = `
+      document.getElementById('day-content').innerHTML = `
         <div class="text-red-600 p-4">
           Erreur lors de l'initialisation: ${error.message}
         </div>

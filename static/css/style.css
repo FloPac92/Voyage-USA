@@ -409,11 +409,11 @@ h1, h2, h3, blockquote {
   }
 }
 
-nav {
+.top-nav {
   position: sticky;
   top: 0;
   z-index: 999;
-  background-color: white; /* use site background color if different */
+  background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 

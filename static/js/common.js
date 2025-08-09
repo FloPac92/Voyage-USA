@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   const offset = header ? header.offsetHeight : 0;
 
-  const links = document.querySelectorAll('header nav a[href^="#"]');
+  const links = document.querySelectorAll(
+    '#side-nav a[href^="#"], header nav a[href^="#"]'
+  );
   links.forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
@@ -40,6 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
+      }
+
+      if (button && nav && nav.classList.contains('show')) {
+        nav.classList.remove('show');
+        nav.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
       }
     });
   });

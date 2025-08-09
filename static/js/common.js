@@ -66,9 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
-
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
       }
 
       if (button && nav && overlay && nav.classList.contains('show')) {

@@ -18,25 +18,6 @@
   color: white;
 }
 
-/* Side navigation links */
-.side-nav a {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.side-nav a:hover {
-  background-color: #dbeafe;
-  color: #1d4ed8;
-}
-
-.side-nav a.active {
-  background-color: #2563eb;
-  color: #ffffff;
-  font-weight: 600;
-}
-
 @media (max-width: 900px) {
   .day-button {
     width: auto;

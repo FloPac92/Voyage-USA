@@ -321,13 +321,6 @@ function showDay(dayNumber, button) {
   }
 }
 
-
-// Mobile menu
-document.getElementById('mobile-menu-button').addEventListener('click', () => {
-  const nav = document.getElementById('side-nav');
-  nav.classList.toggle('hidden');
-});
-
 // Initialize
 window.addEventListener('load', async () => {
   console.log('Loading application...');

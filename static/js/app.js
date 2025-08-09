@@ -259,28 +259,37 @@ function showDay(dayNumber, button) {
       zoomControl: true
     });
 
-    omnivore.kml(KML_PATH)
-      .on('ready', function() {
-        const layers = [];
-        this.eachLayer(layer => {
-          const featureDay = parseInt(layer.feature?.properties?.day, 10);
-          if (featureDay === dayNum) {
-            layers.push(layer);
-            layer.addTo(miniMap);
-            if (layer.getLatLng) {
-              layer.on('click', () => showDay(featureDay));
-            }
-          }
-        });
-        if (layers.length) {
-          const group = L.featureGroup(layers);
-          miniMap.fitBounds(group.getBounds(), { padding: [10, 10] });
-        }
-        miniMap.invalidateSize();
-      })
-      .on('error', error => {
-        console.error('Mini-map KML load error', error);
-      });
+    const features = [];
+    const currentLatLng = [day.lat, day.lng];
+
+    // Marker for the current day
+    const startMarker = L.marker(currentLatLng).addTo(miniMap);
+    startMarker.on('click', () => showDay(dayNum));
+    features.push(startMarker);
+
+    // If next day exists, draw segment to it
+    const nextDay = window.tripData.find(d => d.day === dayNum + 1);
+    if (nextDay && typeof nextDay.lat === 'number' && typeof nextDay.lng === 'number') {
+      const nextLatLng = [nextDay.lat, nextDay.lng];
+      const endMarker = L.marker(nextLatLng).addTo(miniMap);
+      endMarker.on('click', () => showDay(nextDay.day));
+      const polyline = L.polyline([currentLatLng, nextLatLng], {
+        color: '#2563eb',
+        weight: 3,
+        opacity: 1
+      }).addTo(miniMap);
+      polyline.on('click', () => showDay(nextDay.day));
+      features.push(endMarker, polyline);
+    }
+
+    if (features.length) {
+      const group = L.featureGroup(features);
+      miniMap.fitBounds(group.getBounds(), { padding: [10, 10] });
+    } else {
+      miniMap.setView(currentLatLng, 8);
+    }
+
+    miniMap.invalidateSize();
 
     block.appendChild(leftCol);
     block.appendChild(rightCol);

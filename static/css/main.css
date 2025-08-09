@@ -18,6 +18,14 @@
   color: white;
 }
 
+@media (max-width: 900px) {
+  .day-button {
+    width: auto;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+}
+
 /* Timeline styling */
 .timeline-item::before {
   content: '';

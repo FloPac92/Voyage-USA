@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="static/css/roadtrip.css" />
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <header class="sticky top-0 bg-white shadow-lg z-40">
+  <header class="sticky top-0 bg-white shadow-lg z-50">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <h1 class="text-xl font-bold">Road Trip USA 2026</h1>
@@ -19,52 +19,39 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <nav class="hidden md:flex space-x-4">
-          <a href="#accueil" class="hover:text-blue-500">Accueil</a>
-          <a href="#itineraire" class="hover:text-blue-500">Itinéraire</a>
-          <a href="#programme" class="hover:text-blue-500">Programme</a>
-          <a href="#infos" class="hover:text-blue-500">Infos</a>
-        </nav>
       </div>
     </div>
   </header>
 
-  <section id="accueil"></section>
-  <section id="itineraire" class="h-[400px] mb-8"></section>
+  <main>
+  <!-- Sidebar -->
+  <nav id="side-nav" class="side-nav hidden md:flex md:flex-col p-4" aria-hidden="true" tabindex="-1">
+    <h2 class="text-lg font-semibold mb-4">Jours</h2>
+    <div id="nav-buttons" class="space-y-2"></div>
+  </nav>
 
-  <section id="programme" class="py-8 mb-8">
-    <main>
-      <!-- Sidebar -->
-      <nav id="side-nav" class="side-nav hidden md:flex md:flex-col p-4" aria-hidden="true" tabindex="-1">
-        <h2 class="text-lg font-semibold mb-4">Jours</h2>
-        <div id="nav-buttons" class="space-y-2"></div>
-      </nav>
+  <!-- Content -->
+  <section id="content">
+    <!-- Map -->
+    <div id="map-container" class="h-64 mb-6"></div>
+    <p id="map-error" class="text-red-600 hidden">Impossible de charger la carte.</p>
 
-      <!-- Content -->
-      <section id="content">
-        <!-- Map -->
-        <div id="map-container" class="h-64 mb-6"></div>
-        <p id="map-error" class="text-red-600 hidden">Impossible de charger la carte.</p>
+    <!-- Day details -->
+    <div id="day-content"></div>
 
-        <!-- Day details -->
-        <div id="day-content"></div>
-
-        <!-- Infos pratiques -->
-        <section id="infos-pratiques" class="mt-8">
-          <h2 class="text-xl font-semibold mb-2">Infos pratiques</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Budget estimé : 2 800 €/personne</li>
-            <li>Météo : Été chaud, prévoir crème solaire et chapeau</li>
-            <li>Transports : Voiture de location incluse, conduite à droite</li>
-            <li>Hébergements : Cabane, lodge, hôtel — réservations incluses</li>
-            <li>Conseil : Télécharger l’application offline Maps.me pour le GPS</li>
-          </ul>
-        </section>
-      </section>
-    </main>
+    <!-- Infos pratiques -->
+    <section id="infos-pratiques" class="mt-8">
+      <h2 class="text-xl font-semibold mb-2">Infos pratiques</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Budget estimé : 2 800 €/personne</li>
+        <li>Météo : Été chaud, prévoir crème solaire et chapeau</li>
+        <li>Transports : Voiture de location incluse, conduite à droite</li>
+        <li>Hébergements : Cabane, lodge, hôtel — réservations incluses</li>
+        <li>Conseil : Télécharger l’application offline Maps.me pour le GPS</li>
+      </ul>
+    </section>
   </section>
-
-  <section id="infos"></section>
+</main>
 
 
   <footer class="bg-gray-800 text-white text-center p-4">

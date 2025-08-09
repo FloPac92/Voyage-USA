@@ -349,9 +349,14 @@ h1, h2, h3, blockquote {
     grid-template-columns: 1fr;
   }
   .programme-menu {
+    position: static;
+    top: auto;
+    max-height: none;
     display: flex;
     overflow-x: auto;
+    overflow-y: visible;
     white-space: nowrap;
+    margin-bottom: 1rem;
   }
   #programme-menu ul {
     display: flex;

@@ -78,6 +78,9 @@
       <Placemark>
         <name>Itinéraire de San Francisco à Los Angeles, Californie, États-Unis</name>
         <styleUrl>#line-1267FF-5000-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>0</value></Data>
+        </ExtendedData>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
@@ -15087,6 +15090,10 @@
       <Placemark>
         <name>San Francisco</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>1</value></Data>
+          <Data name="day"><value>2</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -122.419306,37.7749472,0
@@ -15096,6 +15103,9 @@
       <Placemark>
         <name>Monterey</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>3</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -121.8979568,36.5972986,0
@@ -15105,6 +15115,10 @@
       <Placemark>
         <name>Yosemite National Park, Californie, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>4</value></Data>
+          <Data name="day"><value>5</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -119.5723435,37.8505002,0
@@ -15114,6 +15128,9 @@
       <Placemark>
         <name>Death Valley, Californie, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>6</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -116.9046405,36.561585,0
@@ -15123,6 +15140,9 @@
       <Placemark>
         <name>Las Vegas, Nevada, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>7</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -115.139101,36.171543,0
@@ -15132,6 +15152,9 @@
       <Placemark>
         <name>Zion National Park Lodge, Zion Canyon Scenic Drive, Springdale, Utah, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>8</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -112.9570264,37.2504937,0
@@ -15141,6 +15164,9 @@
       <Placemark>
         <name>Monument Valley, Arizona, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>9</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -110.192821,36.9918142,0
@@ -15150,6 +15176,10 @@
       <Placemark>
         <name>Page, Arizona, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>10</value></Data>
+          <Data name="day"><value>11</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -111.4558467,36.9147356,0
@@ -15159,6 +15189,9 @@
       <Placemark>
         <name>Grand Canyon, Arizona, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>12</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -112.1177337,36.0654419,0
@@ -15168,6 +15201,12 @@
       <Placemark>
         <name>Los Angeles, Californie, États-Unis</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <ExtendedData>
+          <Data name="day"><value>13</value></Data>
+          <Data name="day"><value>14</value></Data>
+          <Data name="day"><value>15</value></Data>
+          <Data name="day"><value>16</value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>
             -118.2426603,34.0549066,0

@@ -7,10 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="static/css/main.css" />
+  <link rel="stylesheet" href="static/css/roadtrip.css" />
+  <link rel="stylesheet" href="static/css/style.css" />
   
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <header class="sticky top-0 bg-white shadow-lg z-50">
+  <header class="sticky top-0 bg-white shadow-lg z-40">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <h1 class="text-xl font-bold">Road Trip USA 2026</h1>
@@ -20,79 +22,99 @@
           </svg>
         </button>
       </div>
+      <nav class="top-nav hidden md:flex space-x-4 justify-center py-2">
+        <a href="#accueil">Accueil</a>
+        <a href="#itineraire">Itinéraire</a>
+        <a href="#programme">Programme</a>
+        <a href="#infos">Infos pratiques</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Map section -->
-<section id="map" class="h-[400px] relative z-0">
-  <div id="map-container" class="w-full h-full"></div>
-</section>
+  <nav id="side-nav"
+       class="side-nav hidden p-4 space-y-4"
+       aria-hidden="true">
+    <a href="#accueil">Accueil</a>
+    <a href="#itineraire">Itinéraire</a>
+    <a href="#programme">Programme</a>
+    <a href="#infos">Infos pratiques</a>
+  </nav>
 
-<!-- Main content -->
-<main class="min-h-screen relative">
-  <div class="flex">
-    <!-- Side navigation -->
-    <nav id="side-nav" class="side-nav hidden md:flex md:flex-col w-72 bg-white shadow-lg h-[calc(100vh-200px)] sticky top-16 overflow-y-auto" aria-hidden="true" tabindex="-1">
-      <div class="p-6">
-        <div class="text-2xl font-bold mb-6 text-blue-600">Programme du voyage</div>
-        <div id="days-nav" class="space-y-2">
-          <!-- Days navigation will be inserted here -->
-        </div>
-      </div>
-    </nav>
-
-    <!-- Main content area -->
-    <div class="flex-1">
-      <div id="day-content" class="max-w-7xl mx-auto p-6">
-        <div class="flex flex-col md:flex-row md:space-x-8">
-          <!-- Left column: Content -->
-          <div class="flex-1 px-8">
-            <!-- Title and info -->
-            <div class="mb-8">
-              <h2 id="day-title" class="text-4xl font-bold mb-6 text-blue-800"></h2>
-
-              <!-- Travel info icons -->
-              <div class="inline-flex items-center gap-8 px-6 py-4 bg-blue-50 rounded-lg mb-8">
-                <div class="flex items-center">
-                  <span class="text-2xl mr-3 text-blue-500">⏰</span>
-                  <span id="wake-up" class="text-blue-700"></span>
-                </div>
-                <div class="flex items-center">
-                  <span class="text-2xl mr-3 text-blue-500">🏨</span>
-                  <span id="sleep" class="text-blue-700"></span>
-                </div>
-                <div class="flex items-center">
-                  <span class="text-2xl mr-3 text-blue-500">🚗</span>
-                  <span id="distance" class="text-blue-700"></span>
-                </div>
-              </div>
-
-              <!-- Activities -->
-              <div class="prose max-w-none">
-                <div id="activities-list" class="space-y-6 pl-8">
-                  <!-- Activities will be inserted here -->
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right column: Photo -->
-          <div class="md:w-1/3 md:sticky md:top-24">
-            <div id="photos-grid" class="sticky top-24">
-              <!-- Photos will be inserted here -->
-            </div>
-          </div>
-        </div>
-      </div>
+  <section id="accueil" class="hero">
+    <div class="hero-text">
+      <h1>Voyage Caro &amp; Flo</h1>
+      <p>« La vie ce n'est pas seulement respirer. C'est aussi avoir le souffle coupé. » – Alfred Hitchcock</p>
     </div>
-  </div>
-</main>
+  </section>
 
-<!-- Photo lightbox -->
-<div id="lightbox" class="lightbox">
-  <img id="lightbox-img" class="max-h-[90vh] max-w-[90vw] object-contain" src="" alt="">
-  <button class="absolute top-4 right-4 text-white text-4xl" onclick="closeLightbox()">&times;</button>
-</div>
+    <section id="itineraire" class="min-h-[400px] relative z-0 pb-8 mb-8">
+      <h2 class="text-center text-3xl font-bold mb-4">Notre aventure de 16 jours à travers l’Ouest américain</h2>
+      <p class="itineraire-intro text-center italic mb-6">
+        À chaque route un souvenir, laissez l'horizon guider votre aventure.
+      </p>
+      <div class="itineraire-wrapper">
+        <div class="map-zone flex-1">
+          <!-- Carte interactive chargée depuis static/js/app.js et circuit-voyage-usa.kml -->
+          <div id="map-container" class="map-container w-full"></div>
+        </div>
+        <div class="chiffres-cles">
+          <div class="stat-item">
+            <span class="icon">📅</span>
+            <div class="stat-info">
+              <span class="stat-value">16&nbsp;jours</span>
+              <span class="stat-label">Durée</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">🚗</span>
+            <div class="stat-info">
+              <span class="stat-value">~3&nbsp;500&nbsp;km</span>
+              <span class="stat-label">Distance</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">🏞️</span>
+            <div class="stat-info">
+              <span class="stat-value">10</span>
+              <span class="stat-label">Parcs visités</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">🏙️</span>
+            <div class="stat-info">
+              <span class="stat-value">6</span>
+              <span class="stat-label">Villes étapes</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">📷</span>
+            <div class="stat-info">
+              <span class="stat-value">30+</span>
+              <span class="stat-label">Lieux iconiques</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <span class="icon">📍</span>
+            <div class="stat-info">
+              <span class="stat-value">3</span>
+              <span class="stat-label">États traversés</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section id="programme" class="py-8 mb-8">
+    <h2 id="programme-title" class="text-3xl font-bold mb-4 text-center">Notre parcours jour par jour</h2>
+    <div class="programme-layout">
+      <aside id="programme-menu" class="programme-menu" aria-label="Jours du programme"></aside>
+      <section id="programme-detail" class="programme-detail">
+        <div id="mini-map" class="mini-map" aria-label="Mini-carte du jour sélectionné"></div>
+      </section>
+    </div>
+  </section>
+
+  <section id="infos"></section>
 
 
   <footer class="bg-gray-800 text-white text-center p-4">

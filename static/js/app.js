@@ -137,6 +137,10 @@ async function loadTripData() {
 // Render navigation
 function renderNavigation(data) {
   const nav = document.getElementById('days-nav');
+  if (!nav) {
+    console.error('Navigation element not found: #days-nav');
+    return;
+  }
   nav.innerHTML = '';
   const list = document.createElement('ul');
   list.setAttribute('role', 'listbox');
@@ -171,6 +175,19 @@ function showDay(dayNumber, button) {
     const sidebar = document.getElementById('days-nav');
     const detailContainer = document.getElementById('day-content');
     const miniMapContainer = document.getElementById('mini-map');
+
+    if (!sidebar) {
+      console.error('Navigation element not found: #days-nav');
+      return;
+    }
+    if (!detailContainer) {
+      console.error('Detail container not found: #day-content');
+      return;
+    }
+    if (!miniMapContainer) {
+      console.error('Mini map container not found: #mini-map');
+      return;
+    }
 
     // Clean previous mini-map instance to avoid memory leaks
     if (miniMap) {

@@ -32,15 +32,12 @@
 <main class="min-h-screen relative">
   <div class="flex">
     <!-- Side navigation -->
-    <nav
-      id="side-nav"
-      class="side-nav hidden md:flex flex-col items-start gap-4 px-6 w-72 bg-white shadow-lg h-[calc(100vh-200px)] sticky top-16 overflow-y-auto"
-      aria-hidden="true"
-      tabindex="-1"
-    >
-      <div class="text-2xl font-bold text-blue-600">Programme du voyage</div>
-      <div id="days-nav" class="space-y-2 w-full">
-        <!-- Days navigation will be inserted here -->
+    <nav id="side-nav" class="side-nav hidden md:flex md:flex-col w-72 bg-white shadow-lg h-[calc(100vh-200px)] sticky top-16 overflow-y-auto" aria-hidden="true" tabindex="-1">
+      <div class="p-6">
+        <div class="text-2xl font-bold mb-6 text-blue-600">Programme du voyage</div>
+        <div id="days-nav" class="space-y-2">
+          <!-- Days navigation will be inserted here -->
+        </div>
       </div>
     </nav>
 

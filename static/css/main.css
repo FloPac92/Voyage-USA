@@ -57,13 +57,19 @@
 
 /* Mobile menu */
 @media (max-width: 768px) {
-  .side-nav {
+  #side-nav.side-nav {
     position: fixed;
     inset: 0;
     z-index: 50;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     background-color: white;
     transform: translateX(-100%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem;
   }
   .side-nav.hidden {
     display: block !important;

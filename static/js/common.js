@@ -1,55 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('mobile-menu-button');
   const nav = document.getElementById('side-nav');
-  const overlay = document.getElementById('menu-overlay');
-  if (button && nav && overlay) {
+  if (button && nav) {
     const focusableSelectors = 'a, button, [tabindex]:not([tabindex="-1"])';
-
-    const closeMenu = () => {
-      if (!nav.classList.contains('show')) return;
-      nav.classList.remove('show');
-      overlay.classList.remove('show');
-      nav.addEventListener(
-        'transitionend',
-        () => {
-          nav.classList.add('hidden');
-          overlay.classList.add('hidden');
-          nav.setAttribute('aria-hidden', 'true');
-          button.setAttribute('aria-expanded', 'false');
-          button.focus();
-        },
-        { once: true }
-      );
-    };
-
-    const openMenu = () => {
-      nav.classList.remove('hidden');
-      overlay.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        nav.classList.add('show');
-        overlay.classList.add('show');
-      });
-      nav.setAttribute('aria-hidden', 'false');
-      button.setAttribute('aria-expanded', 'true');
-      const first = nav.querySelector(focusableSelectors);
-      (first || nav).focus();
-    };
-
     button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';
+
       if (expanded) {
-        closeMenu();
+        nav.classList.remove('show');
+        nav.addEventListener(
+          'transitionend',
+          () => {
+            nav.classList.add('hidden');
+            nav.setAttribute('aria-hidden', 'true');
+            button.focus();
+          },
+          { once: true }
+        );
       } else {
-        openMenu();
+        nav.classList.remove('hidden');
+        requestAnimationFrame(() => nav.classList.add('show'));
+        nav.setAttribute('aria-hidden', 'false');
+        const first = nav.querySelector(focusableSelectors);
+        (first || nav).focus();
       }
-    });
 
-    overlay.addEventListener('click', closeMenu);
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeMenu();
-      }
+      button.setAttribute('aria-expanded', String(!expanded));
     });
   }
 
@@ -68,11 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top, behavior: 'smooth' });
       }
 
-      if (button && nav && overlay && nav.classList.contains('show')) {
+      if (button && nav && nav.classList.contains('show')) {
         nav.classList.remove('show');
         nav.classList.add('hidden');
-        overlay.classList.remove('show');
-        overlay.classList.add('hidden');
         button.setAttribute('aria-expanded', 'false');
       }
     });

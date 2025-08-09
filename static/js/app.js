@@ -2,6 +2,7 @@
 let map;
 let miniMap; // mini-map instance
 const KML_PATH = './circuit-voyage-usa.kml';
+const STICKY_OFFSET = document.querySelector('header')?.offsetHeight || 0;
 const markerManager = {
   markers: new Map(),
   addMarker(day, marker) {

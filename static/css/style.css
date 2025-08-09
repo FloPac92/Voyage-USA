@@ -353,6 +353,17 @@ h1, h2, h3, blockquote {
     overflow-x: auto;
     white-space: nowrap;
   }
+  #programme-menu ul {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.5rem;
+    scroll-snap-type: x mandatory;
+  }
+  #programme-menu li {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
 }
 
 @media (max-width: 768px) {

@@ -102,7 +102,7 @@ async function initMap() {
       map.fitBounds(this.getBounds());
       if (window.tripData) {
         renderNavigation(window.tripData);
-        await showDay(1);
+        await showDay(1, { scroll: false, focusNav: false });
       }
     })
     .on('error', function(error) {
@@ -150,7 +150,7 @@ function renderNavigation(data) {
     btn.setAttribute('role', 'option');
     btn.setAttribute('tabindex', '0');
     btn.setAttribute('aria-selected', 'false');
-    btn.addEventListener('click', () => showDay(day.day, btn));
+    btn.addEventListener('click', () => showDay(day.day, { button: btn }));
     listItem.appendChild(btn);
     list.appendChild(listItem);
   });
@@ -159,7 +159,7 @@ function renderNavigation(data) {
 }
 
 // Show day content
-function showDay(dayNumber, button) {
+function showDay(dayNumber, options = {}) {
   try {
     const dayNum = parseInt(dayNumber, 10);
     const day = window.tripData.find(d => d.day === dayNum);
@@ -171,6 +171,8 @@ function showDay(dayNumber, button) {
     const sidebar = document.getElementById('programme-menu');
     const detailContainer = document.getElementById('programme-detail');
     const miniMapContainer = document.getElementById('mini-map');
+
+    const { button = null, scroll = true, focusNav = true } = options;
 
     // Clean previous mini-map instance to avoid memory leaks
     if (miniMap) {
@@ -188,7 +190,9 @@ function showDay(dayNumber, button) {
     if (targetBtn) {
       targetBtn.classList.add('selected');
       targetBtn.setAttribute('aria-selected', 'true');
-      targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (focusNav) {
+        targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     Array.from(detailContainer.children).forEach(child => {
@@ -304,7 +308,7 @@ function showDay(dayNumber, button) {
       detailContainer.classList.remove('fade-in');
     }, { once: true });
 
-    if (button) {
+    if (scroll) {
       const programmeTitle = document.getElementById('programme-title');
       if (programmeTitle) {
         const top = programmeTitle.getBoundingClientRect().top + window.scrollY - STICKY_OFFSET;

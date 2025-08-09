@@ -76,7 +76,7 @@ async function initMap() {
           });
           marker.openPopup();
           marker.openTooltip();
-          showDay(point.day);
+          // showDay(point.day);
         });
       }
     });

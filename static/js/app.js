@@ -175,7 +175,10 @@ function showDay(dayNumber, button) {
     // Clean previous mini-map instance to avoid memory leaks
     if (miniMap) {
       miniMap.remove();
+      miniMap = null;
     }
+    const container = L.DomUtil.get('mini-map');
+    if (container) container._leaflet_id = null;
     miniMapContainer.innerHTML = '';
     sidebar.querySelectorAll('button').forEach(btn => {
       btn.classList.remove('selected');
